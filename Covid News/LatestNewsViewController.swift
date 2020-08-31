@@ -110,12 +110,7 @@ class LatestNewsViewController: UIViewController, UITableViewDataSource, UITable
         
         return cell
     }
-    //    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-    //        let articleVC = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "article") as! ArticleViewController
-    //        articleVC.url = self.articles?[indexPath.item].urlWebsite
-    //        self.present(articleVC, animated: true, completion: nil)
-    //    }
-    //
+    
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "article"{
