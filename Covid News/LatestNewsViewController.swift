@@ -16,12 +16,12 @@ class LatestNewsViewController: UIViewController, UITableViewDataSource, UITable
     
     var articles: [Articles]? = [] // holds array of Articles data
     
+    
     @IBOutlet weak var table_view: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         table_view.cellLayoutMarginsFollowReadableWidth = true
-        
         navigationController?.navigationBar.prefersLargeTitles = true
         retriveData()
         
@@ -72,8 +72,7 @@ class LatestNewsViewController: UIViewController, UITableViewDataSource, UITable
                 articles?.append(article) //put article data in the array
             }
             
-            print(jsonArticles)
-            
+
             DispatchQueue.main.async {
                 
                 if(articles!.count > 0)
@@ -116,7 +115,7 @@ class LatestNewsViewController: UIViewController, UITableViewDataSource, UITable
         if segue.identifier == "article"{
             if table_view.indexPathForSelectedRow != nil{
                 let destinationController = segue.destination as! ArticleViewController
-                destinationController.url? = newsData.urlWebsite!
+                destinationController.url = urlRequest
             }
         }
     }

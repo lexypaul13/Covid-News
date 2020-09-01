@@ -153,7 +153,7 @@
                                             <outlet property="headLine" destination="PEr-5e-9J2" id="QkY-9o-Ssy"/>
                                             <outlet property="newsImage" destination="AjZ-f3-lpk" id="jc7-7l-fUP"/>
                                             <outlet property="timePublication" destination="AkU-wh-WuE" id="zMh-Gd-JVu"/>
-                                            <segue destination="Unx-td-tnF" kind="show" id="vDN-L4-NRE"/>
+                                            <segue destination="Unx-td-tnF" kind="show" identifier="article" id="vDN-L4-NRE"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>

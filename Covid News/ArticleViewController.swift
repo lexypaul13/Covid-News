@@ -12,13 +12,13 @@ class ArticleViewController: UIViewController {
 
     @IBOutlet weak var articlePage: WKWebView!
     
-    var url : String?
+    var url : String =  "http://newsapi.org/v2/everything?domains=cdc.gov&apiKey=d32071cd286c4f6b9c689527fc195b03"
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if let url = URL(string: url ?? "") {
-                   let request = URLRequest(url: url)
-                   articlePage.load(request)
+        if let url = URL(string: url ) {
+        let request = URLRequest(url: url)
+            print(articlePage.load(request)!)
         // Do any additional setup after loading the view.
     }
     
