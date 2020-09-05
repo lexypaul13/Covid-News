@@ -12,7 +12,7 @@ class LatestNewsViewController: UIViewController, UITableViewDataSource, UITable
     
     let newsData = Articles() //Model object
     
-    let urlRequest = "http://newsapi.org/v2/everything?domains=cdc.gov&apiKey=d32071cd286c4f6b9c689527fc195b03" //Website API
+    let urlRequest = "https://newsapi.org/v2/everything?q=coronavirus&apiKey=d32071cd286c4f6b9c689527fc195b03" //Website API
     var urlSelected = ""
 
     var articles: [Articles]? = [] // holds array of Articles data

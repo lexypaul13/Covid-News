@@ -12,7 +12,7 @@ class ArticleViewController: UIViewController {
 
     @IBOutlet weak var articlePage: WKWebView!
     
-    var url : String =  "http://newsapi.org/v2/everything?domains=cdc.gov&apiKey=d32071cd286c4f6b9c689527fc195b03"
+    var url : String =  "https://newsapi.org/v2/everything?q=coronavirus&apiKey=d32071cd286c4f6b9c689527fc195b03"
     
     override func viewDidLoad() {
         super.viewDidLoad()
