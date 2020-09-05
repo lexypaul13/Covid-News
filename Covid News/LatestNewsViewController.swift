@@ -13,7 +13,8 @@ class LatestNewsViewController: UIViewController, UITableViewDataSource, UITable
     let newsData = Articles() //Model object
     
     let urlRequest = "http://newsapi.org/v2/everything?domains=cdc.gov&apiKey=d32071cd286c4f6b9c689527fc195b03" //Website API
-    
+    var urlSelected = ""
+
     var articles: [Articles]? = [] // holds array of Articles data
     
     
@@ -115,11 +116,23 @@ class LatestNewsViewController: UIViewController, UITableViewDataSource, UITable
         if segue.identifier == "article"{
             if table_view.indexPathForSelectedRow != nil{
                 let destinationController = segue.destination as! ArticleViewController
-                destinationController.url = urlRequest
+                destinationController.url = self.urlSelected
             }
         }
     }
+    
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.urlSelected = self.articles?[indexPath.row].urlWebsite ?? ""
+    }
+    
+    
+    
+    
 }
+
+ 
+
 extension UIImageView {
     
     func downloadImage(from url: String){
