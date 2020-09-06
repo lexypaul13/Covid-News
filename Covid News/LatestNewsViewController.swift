@@ -11,12 +11,13 @@ import UIKit
 class LatestNewsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     let newsData = Articles() //Model object
-    
     let urlRequest = "https://newsapi.org/v2/everything?q=coronavirus&apiKey=d32071cd286c4f6b9c689527fc195b03" //Website API
     var urlSelected = ""
-
     var articles: [Articles]? = [] // holds array of Articles data
-    
+    var numberOfArticles: Int
+    {
+     return articles!.count
+    }
     
     @IBOutlet weak var table_view: UITableView!
     
@@ -121,11 +122,27 @@ class LatestNewsViewController: UIViewController, UITableViewDataSource, UITable
         }
     }
     
-    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.urlSelected = self.articles?[indexPath.row].urlWebsite ?? ""
+           self.urlSelected = self.articles?[indexPath.row].urlWebsite ?? ""
+       }
+       
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        let lastItem = articles!.count - 1
+        if indexPath.row == lastItem{
+            loadMoreArticles() 
+        }
     }
     
+    func loadMoreArticles()  {
+    
+        for i in 0..<articles!.count{
+            let lastItem = articles?.last!
+            let newNum = numberOfArticles + 1
+            articles?.append(lastItem!)
+        }
+        table_view.reloadData()
+    }
     
     
     
