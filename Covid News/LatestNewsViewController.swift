@@ -72,6 +72,7 @@ class LatestNewsViewController: UIViewController, UITableViewDataSource, UITable
                 article.urlImage = jsonArticle["urlToImage"] as? String
                 article.urlWebsite = jsonArticle["url"] as? String
                 articles?.append(article) //put article data in the array
+                
             }
             
 
@@ -103,12 +104,23 @@ class LatestNewsViewController: UIViewController, UITableViewDataSource, UITable
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell1", for: indexPath) as! NewsTableViewCell
         cell.authorName.text = articles?[indexPath.row].author
         cell.headLine.text = articles?[indexPath.row].title
         cell.timePublication.text = articles?[indexPath.row].publishedAt
         cell.newsImage.downloadImage(from:(self.articles?[indexPath.item].urlImage ?? "nill"))
+
+        if let date = articles?[indexPath.row].publishedAt{
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd"
+            guard let time = dateFormatter.date(from: date) else { return cell }
+            let formattedString = dateFormatter.string(from:time)
+            cell.timePublication.text = formattedString
+        }
         
+        
+ 
         return cell
     }
     
@@ -130,20 +142,10 @@ class LatestNewsViewController: UIViewController, UITableViewDataSource, UITable
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         let lastItem = articles!.count - 1
         if indexPath.row == lastItem{
-            loadMoreArticles() 
         }
     }
     
-    func loadMoreArticles()  {
-    
-        for i in 0..<articles!.count{
-            let lastItem = articles?.last!
-            let newNum = numberOfArticles + 1
-            articles?.append(lastItem!)
-        }
-        table_view.reloadData()
-    }
-    
+
     
     
 }
@@ -165,9 +167,11 @@ extension UIImageView {
             
             DispatchQueue.main.async {
                 self.image = UIImage(data: data!)
+                
             }
         }
         task.resume()
-    }
+     }
+    
 }
 
