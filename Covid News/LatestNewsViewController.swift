@@ -8,29 +8,43 @@
 
 import UIKit
 
-class LatestNewsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class LatestNewsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate {
     
     let newsData = Articles() //Model object
-    let urlRequest = "https://newsapi.org/v2/everything?q=coronavirus&apiKey=d32071cd286c4f6b9c689527fc195b03" //Website API
+    
+    let urlRequest = "http://newsapi.org/v2/everything?q=coronavirus&sortBy=popularity&apiKey=d32071cd286c4f6b9c689527fc195b03&pageSize=50&page=2" //Website API
     var urlSelected = ""
     var articles: [Articles]? = [] // holds array of Articles data
-    var numberOfArticles: Int
-    {
-     return articles!.count
-    }
+    var filteredArticles:[Articles]? = []
+    var isSearching = false
+
+    @IBOutlet weak var searchArticles: UISearchBar!
+    
+    let indDateFormatter =  ISO8601DateFormatter()
+    let outDateFormtter : DateFormatter = {
+        let df = DateFormatter()
+        df.dateFormat = "dd-MM-yyyy"
+        df.locale = Locale(identifier: "en_US_POSIX")
+        return df
+    }()
+    
+    
     
     @IBOutlet weak var table_view: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         table_view.cellLayoutMarginsFollowReadableWidth = true
         navigationController?.navigationBar.prefersLargeTitles = true
+        searchArticles.delegate = self
+        
         retriveData()
         
         
     }
     
-    func retriveData(){
+    func retriveData(  ){
         guard let aritcleUrl = URL(string: urlRequest) else { //send a request to the server
             return
         }
@@ -44,15 +58,14 @@ class LatestNewsViewController: UIViewController, UITableViewDataSource, UITable
             }
             if let data = data { // converts data to an array of Article objects
                 self.articles = self.parseData(data: data)
-                
-                
-                
+
             }
             
             
         })
         
         task.resume()
+        return
     }
     
     
@@ -72,10 +85,10 @@ class LatestNewsViewController: UIViewController, UITableViewDataSource, UITable
                 article.urlImage = jsonArticle["urlToImage"] as? String
                 article.urlWebsite = jsonArticle["url"] as? String
                 articles?.append(article) //put article data in the array
-                
             }
             
-
+            print(jsonArticles)
+            
             DispatchQueue.main.async {
                 
                 if(articles!.count > 0)
@@ -92,6 +105,7 @@ class LatestNewsViewController: UIViewController, UITableViewDataSource, UITable
     }
     
     
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 163
     }
@@ -99,7 +113,11 @@ class LatestNewsViewController: UIViewController, UITableViewDataSource, UITable
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return articles?.count ?? 0
+      
+        
+            return articles?.count ?? 0
+
+        
     }
     
     
@@ -124,7 +142,6 @@ class LatestNewsViewController: UIViewController, UITableViewDataSource, UITable
         return cell
     }
     
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "article"{
             if table_view.indexPathForSelectedRow != nil{
@@ -133,24 +150,39 @@ class LatestNewsViewController: UIViewController, UITableViewDataSource, UITable
             }
         }
     }
+
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-           self.urlSelected = self.articles?[indexPath.row].urlWebsite ?? ""
-       }
-       
+    func searchBar(_ searchBar: UISearchBar,textDidChange searchText: String){
+        filteredArticles = articles
+        if searchArticles.text == "" {
+                  isSearching = false
+            table_view.reloadData()
+              } else {
+                  isSearching = true
+                filteredArticles = articles!.filter({$0.contains(searchBar.text ?? "")})
+                   table_view.reloadData()
+              }
+        
+    }
+        
     
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        let lastItem = articles!.count - 1
-        if indexPath.row == lastItem{
-        }
+    
+    
+    
+    
+        
     }
     
-
     
     
-}
+    
+    
+    
+    
+    
 
- 
+
+
 
 extension UIImageView {
     
@@ -171,7 +203,7 @@ extension UIImageView {
             }
         }
         task.resume()
-     }
+    }
     
 }
 

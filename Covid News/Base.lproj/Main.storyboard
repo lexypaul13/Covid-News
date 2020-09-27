@@ -1,114 +1,94 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="2aS-Pf-N0M">
-    <device id="retina5_9" orientation="portrait" appearance="light"/>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="2aS-Pf-N0M">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Search News-->
-        <scene sceneID="n1u-Hd-ru2">
-            <objects>
-                <viewController id="HiC-vi-JjZ" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="LEY-9G-pcu">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <searchBar contentMode="redraw" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uEU-dG-2JT">
-                                <rect key="frame" x="0.0" y="88" width="375" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </searchBar>
-                        </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <viewLayoutGuide key="safeArea" id="Qfc-jU-d3C"/>
-                    </view>
-                    <navigationItem key="navigationItem" title="Search News" id="abf-MI-JHw"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="zp7-ug-Ssg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1951" y="219"/>
-        </scene>
         <!--Saved-->
         <scene sceneID="gbK-bl-hR2">
             <objects>
                 <viewController id="9rh-PQ-j8E" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8xm-KW-KRL">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="fcr-wA-D63">
-                                <rect key="frame" x="0.0" y="88" width="375" height="641"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="tP8-xB-Nor">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="43.666667938232422"/>
+                                        <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="tP8-xB-Nor" id="XJU-37-DEQ">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.666667938232422"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="eZy-93-vZI"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="fcr-wA-D63" firstAttribute="leading" secondItem="eZy-93-vZI" secondAttribute="leading" id="229-Vu-npF"/>
                             <constraint firstItem="eZy-93-vZI" firstAttribute="bottom" secondItem="fcr-wA-D63" secondAttribute="bottom" id="E8o-fT-Ltd"/>
                             <constraint firstItem="eZy-93-vZI" firstAttribute="trailing" secondItem="fcr-wA-D63" secondAttribute="trailing" id="gwO-a5-8xg"/>
                             <constraint firstItem="fcr-wA-D63" firstAttribute="top" secondItem="eZy-93-vZI" secondAttribute="top" id="lcS-b6-7l6"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="eZy-93-vZI"/>
                     </view>
                     <navigationItem key="navigationItem" title="Saved" id="bJv-r2-7Zv"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bkY-SE-Hvj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1028" y="968"/>
+            <point key="canvasLocation" x="1911" y="482"/>
         </scene>
         <!--Covid News-->
         <scene sceneID="6jm-B6-Ho2">
             <objects>
                 <viewController id="IDY-bv-874" customClass="LatestNewsViewController" customModule="Covid_News" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="QYp-iI-T3V">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="pgz-nL-Yaf">
-                                <rect key="frame" x="0.0" y="88" width="375" height="641"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                <searchBar key="tableHeaderView" contentMode="redraw" id="ixv-Mp-aSf">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <searchBar key="tableHeaderView" contentMode="redraw" text="" id="ixv-Mp-aSf">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <textInputTraits key="textInputTraits"/>
                                 </searchBar>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell1" rowHeight="163" id="l83-mF-Pye" customClass="NewsTableViewCell" customModule="Covid_News" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="72" width="375" height="163"/>
+                                        <rect key="frame" x="0.0" y="72" width="414" height="163"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="l83-mF-Pye" id="t8K-uO-heG">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="163"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="163"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Washington Post" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KAW-mi-cCC">
-                                                    <rect key="frame" x="15.000000000000007" y="5" width="122.66666666666669" height="19"/>
+                                                    <rect key="frame" x="15" y="5" width="122.5" height="19"/>
                                                     <fontDescription key="fontDescription" name="TimesNewRomanPS-BoldMT" family="Times New Roman" pointSize="17"/>
                                                     <color key="textColor" red="0.1723507671" green="0.54395875599999999" blue="0.98655849699999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="AjZ-f3-lpk">
-                                                    <rect key="frame" x="220" y="10" width="140" height="140"/>
-                                                    <color key="backgroundColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AjZ-f3-lpk">
+                                                    <rect key="frame" x="259" y="10" width="140" height="140"/>
+                                                    <color key="backgroundColor" systemColor="scrollViewTexturedBackgroundColor"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="140" id="6s7-KA-Vg7"/>
                                                         <constraint firstAttribute="height" constant="140" id="vXn-ih-Xe6"/>
                                                     </constraints>
-                                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="default"/>
+                                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large"/>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="TopLeft" horizontalHuggingPriority="251" verticalCompressionResistancePriority="749" text="Amazon's share of the US e-commerce market is now 49%, or 5% of all retail spend" lineBreakMode="headTruncation" numberOfLines="5" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PEr-5e-9J2">
-                                                    <rect key="frame" x="15" y="29.000000000000007" width="195" height="73.666666666666686"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="TopLeft" horizontalHuggingPriority="251" verticalCompressionResistancePriority="749" text="Amazon's share of the US e-commerce market is now 49%, or 5% of all retail spend" lineBreakMode="clip" numberOfLines="4" baselineAdjustment="none" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PEr-5e-9J2">
+                                                    <rect key="frame" x="15" y="29" width="234" height="55.5"/>
                                                     <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="16"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -130,8 +110,8 @@
                                                     </constraints>
                                                     <state key="normal" image="square.and.arrow.up.fill" catalog="system"/>
                                                 </button>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="4hrs" lineBreakMode="clip" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AkU-wh-WuE">
-                                                    <rect key="frame" x="115" y="122.66666666666667" width="35" height="20.333333333333329"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" lineBreakMode="clip" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AkU-wh-WuE">
+                                                    <rect key="frame" x="115" y="122.5" width="10.5" height="20.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -144,8 +124,10 @@
                                                 <constraint firstItem="PEr-5e-9J2" firstAttribute="leading" secondItem="t8K-uO-heG" secondAttribute="leading" constant="15" id="8w3-j2-pkT"/>
                                                 <constraint firstItem="PEr-5e-9J2" firstAttribute="top" secondItem="KAW-mi-cCC" secondAttribute="bottom" constant="5" id="FNB-54-Dmt"/>
                                                 <constraint firstItem="AkU-wh-WuE" firstAttribute="leading" secondItem="Eyd-SB-mGE" secondAttribute="trailing" constant="30" id="Lje-yb-h5k"/>
+                                                <constraint firstItem="AjZ-f3-lpk" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="AkU-wh-WuE" secondAttribute="trailing" constant="8" symbolic="YES" id="MmV-DQ-zdy"/>
                                                 <constraint firstAttribute="bottom" secondItem="GjV-f3-hLM" secondAttribute="bottom" constant="20" id="Ony-VM-Fht"/>
                                                 <constraint firstItem="KAW-mi-cCC" firstAttribute="leading" secondItem="t8K-uO-heG" secondAttribute="leading" constant="15" id="W41-Nv-s6r"/>
+                                                <constraint firstItem="AjZ-f3-lpk" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="KAW-mi-cCC" secondAttribute="trailing" constant="8" symbolic="YES" id="aef-mk-zQl"/>
                                                 <constraint firstAttribute="bottom" secondItem="Eyd-SB-mGE" secondAttribute="bottom" constant="20" id="fO8-34-iMg"/>
                                                 <constraint firstItem="GjV-f3-hLM" firstAttribute="leading" secondItem="t8K-uO-heG" secondAttribute="leading" constant="15" id="fid-Vl-Tyj"/>
                                                 <constraint firstAttribute="bottom" secondItem="AkU-wh-WuE" secondAttribute="bottom" constant="20" id="hjK-ad-Myi"/>
@@ -168,49 +150,50 @@
                                 </connections>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="90Q-Hh-8zc"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="pgz-nL-Yaf" firstAttribute="top" secondItem="90Q-Hh-8zc" secondAttribute="top" id="bIk-NQ-zDB"/>
                             <constraint firstItem="pgz-nL-Yaf" firstAttribute="leading" secondItem="90Q-Hh-8zc" secondAttribute="leading" id="eyS-lu-pfO"/>
                             <constraint firstItem="90Q-Hh-8zc" firstAttribute="bottom" secondItem="pgz-nL-Yaf" secondAttribute="bottom" id="nwH-wY-1Qv"/>
                             <constraint firstItem="90Q-Hh-8zc" firstAttribute="trailing" secondItem="pgz-nL-Yaf" secondAttribute="trailing" id="t5G-mp-p9N"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="90Q-Hh-8zc"/>
                     </view>
                     <navigationItem key="navigationItem" title="Covid News" id="9uz-nm-QwN"/>
                     <connections>
+                        <outlet property="searchArticles" destination="ixv-Mp-aSf" id="kJE-tA-1WL"/>
                         <outlet property="table_view" destination="pgz-nL-Yaf" id="jvq-nm-tCL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Qz-wS-28V" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1911.594202898551" y="-498.21428571428567"/>
+            <point key="canvasLocation" x="1911.2" y="-498.76847290640399"/>
         </scene>
         <!--Article View Controller-->
         <scene sceneID="CjJ-Co-EZL">
             <objects>
                 <viewController storyboardIdentifier="article" id="Unx-td-tnF" customClass="ArticleViewController" customModule="Covid_News" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Iz8-sa-IXb">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <wkWebView contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="KKy-PZ-yjy">
-                                <rect key="frame" x="0.0" y="88" width="375" height="641"/>
-                                <color key="backgroundColor" systemColor="systemGrayColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <color key="backgroundColor" systemColor="systemGrayColor"/>
                                 <wkWebViewConfiguration key="configuration">
                                     <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
                                     <wkPreferences key="preferences"/>
                                 </wkWebViewConfiguration>
                             </wkWebView>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="iP6-N3-bxD"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="KKy-PZ-yjy" firstAttribute="bottom" secondItem="iP6-N3-bxD" secondAttribute="bottom" id="68h-tx-keG"/>
                             <constraint firstItem="KKy-PZ-yjy" firstAttribute="trailing" secondItem="iP6-N3-bxD" secondAttribute="trailing" id="ef2-9Q-Ieg"/>
                             <constraint firstItem="KKy-PZ-yjy" firstAttribute="top" secondItem="iP6-N3-bxD" secondAttribute="top" id="hvO-cz-65T"/>
                             <constraint firstItem="KKy-PZ-yjy" firstAttribute="leading" secondItem="iP6-N3-bxD" secondAttribute="leading" id="k6u-oD-F7r"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="iP6-N3-bxD"/>
                     </view>
                     <navigationItem key="navigationItem" leftItemsSupplementBackButton="YES" id="JbF-4b-OTl"/>
                     <connections>
@@ -233,7 +216,6 @@
                     </tabBar>
                     <connections>
                         <segue destination="V3x-ip-Ds7" kind="relationship" relationship="viewControllers" id="lXe-UZ-MJh"/>
-                        <segue destination="xGM-EC-ekF" kind="relationship" relationship="viewControllers" id="oXG-za-KkD"/>
                         <segue destination="tTH-Rh-g5T" kind="relationship" relationship="viewControllers" id="1Cd-lM-UfI"/>
                     </connections>
                 </tabBarController>
@@ -246,14 +228,14 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="V3x-ip-Ds7" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="News" image="news25" id="ykC-rO-R0i">
-                        <color key="badgeColor" systemColor="systemPinkColor" red="1" green="0.1764705882" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="badgeColor" systemColor="systemPinkColor"/>
                     </tabBarItem>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="mbR-fz-6tg"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="O7O-oF-ty0">
-                        <rect key="frame" x="0.0" y="44" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="barTintColor" systemColor="systemPurpleColor" red="0.68627450980000004" green="0.32156862749999998" blue="0.87058823529999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="barTintColor" systemColor="systemBlueColor"/>
                         <textAttributes key="titleTextAttributes">
                             <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </textAttributes>
@@ -270,25 +252,6 @@
             </objects>
             <point key="canvasLocation" x="1001.4492753623189" y="-498.21428571428567"/>
         </scene>
-        <!--Search-->
-        <scene sceneID="wtY-EK-XiE">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="xGM-EC-ekF" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Search" image="magnifyingglass" catalog="system" id="nyx-dI-7bO"/>
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="rtw-Ua-62G">
-                        <rect key="frame" x="0.0" y="44" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="HiC-vi-JjZ" kind="relationship" relationship="rootViewController" id="X2F-sG-uIa"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Odd-x0-Uqb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1028" y="219"/>
-        </scene>
         <!--Navigation Controller-->
         <scene sceneID="Eqn-YT-xbA">
             <objects>
@@ -296,7 +259,7 @@
                     <tabBarItem key="tabBarItem" selectedImage="clock" systemItem="mostRecent" id="LC3-4g-tTk"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="q0R-rl-VwA">
-                        <rect key="frame" x="0.0" y="44" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -306,14 +269,28 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZgN-78-V6t" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="146" y="968"/>
+            <point key="canvasLocation" x="908" y="482"/>
         </scene>
     </scenes>
     <resources>
         <image name="bookmark" catalog="system" width="112" height="128"/>
         <image name="clock" width="128" height="121"/>
-        <image name="magnifyingglass" catalog="system" width="128" height="115"/>
         <image name="news25" width="25" height="25"/>
         <image name="square.and.arrow.up.fill" catalog="system" width="115" height="128"/>
+        <systemColor name="scrollViewTexturedBackgroundColor">
+            <color red="0.43529411764705878" green="0.44313725490196082" blue="0.47450980392156861" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemBlueColor">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemGrayColor">
+            <color red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemPinkColor">
+            <color red="1" green="0.17647058823529413" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
     </resources>
 </document>

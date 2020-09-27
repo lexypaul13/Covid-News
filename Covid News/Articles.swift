@@ -14,3 +14,8 @@ class Articles: NSObject{
     var urlImage: String?
     var urlWebsite : String?
 }
+
+
+
+    
+
