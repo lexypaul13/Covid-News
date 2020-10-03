@@ -8,18 +8,29 @@
 
 import UIKit
 
-class LatestNewsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate {
+class LatestNewsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate,UISearchResultsUpdating  {
     
-    let newsData = Articles() //Model object
+    
+ 
+    var newsData = Articles() //Model object
     
     let urlRequest = "http://newsapi.org/v2/everything?q=coronavirus&sortBy=popularity&apiKey=d32071cd286c4f6b9c689527fc195b03&pageSize=50&page=2" //Website API
     var urlSelected = ""
-    var articles: [Articles]? = [] // holds array of Articles data
-    var filteredArticles:[Articles]? = []
-    var isSearching = false
-
-    @IBOutlet weak var searchArticles: UISearchBar!
     
+    var articles: [Articles]? = [] // holds array of model object
+    var filteredArticles:[Articles]! = [] //holds searched articles
+    let searchController = UISearchController(searchResultsController: nil)
+
+    var isSearchBarEmpty: Bool {
+      return searchController.searchBar.text?.isEmpty ?? true
+    }
+    var isFiltering: Bool {
+      return searchController.isActive && !isSearchBarEmpty
+    }
+
+    
+    @IBOutlet weak var table_view: UITableView!
+
     let indDateFormatter =  ISO8601DateFormatter()
     let outDateFormtter : DateFormatter = {
         let df = DateFormatter()
@@ -28,37 +39,34 @@ class LatestNewsViewController: UIViewController, UITableViewDataSource, UITable
         return df
     }()
     
-    
-    
-    @IBOutlet weak var table_view: UITableView!
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        table_view.dataSource = self
         table_view.cellLayoutMarginsFollowReadableWidth = true
         navigationController?.navigationBar.prefersLargeTitles = true
-        searchArticles.delegate = self
-        
         retriveData()
         
-        
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Search News"
+        navigationItem.searchController = searchController
+        definesPresentationContext = true
+
+ 
     }
     
     func retriveData(  ){
         guard let aritcleUrl = URL(string: urlRequest) else { //send a request to the server
             return
         }
-        
         let request = URLRequest(url: aritcleUrl)
         let task = URLSession.shared.dataTask(with: request, completionHandler: { (data, response, error) -> Void in //collects content from website
-            
             if  error != nil { // checks if content is available
                 print(error ?? 0)
                 return
             }
             if let data = data { // converts data to an array of Article objects
                 self.articles = self.parseData(data: data)
-
             }
             
             
@@ -124,23 +132,32 @@ class LatestNewsViewController: UIViewController, UITableViewDataSource, UITable
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell1", for: indexPath) as! NewsTableViewCell
+        let news : Articles
+        filteredArticles = articles
+
+        if isFiltering{
+            news = filteredArticles[indexPath.row]
+        }
+        else{
+            newsData = articles![indexPath.row]
+        }
         cell.authorName.text = articles?[indexPath.row].author
         cell.headLine.text = articles?[indexPath.row].title
-        cell.timePublication.text = articles?[indexPath.row].publishedAt
         cell.newsImage.downloadImage(from:(self.articles?[indexPath.item].urlImage ?? "nill"))
+        cell.timePublication.text = articles?[indexPath.row].publishedAt
 
-        if let date = articles?[indexPath.row].publishedAt{
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "yyyy-MM-dd"
-            guard let time = dateFormatter.date(from: date) else { return cell }
-            let formattedString = dateFormatter.string(from:time)
-            cell.timePublication.text = formattedString
-        }
+        if let dateString = articles?[indexPath.row].publishedAt,
+        let date = indDateFormatter.date(from: dateString){
+                   let formattedString = outDateFormtter.string(from: date)
+                   cell.timePublication.text = formattedString
+               } else {
+                   cell.timePublication.text = "----------"
+               }
         
-        
+               return cell
+           }
  
-        return cell
-    }
+     
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "article"{
@@ -150,39 +167,28 @@ class LatestNewsViewController: UIViewController, UITableViewDataSource, UITable
             }
         }
     }
-
-    
-    func searchBar(_ searchBar: UISearchBar,textDidChange searchText: String){
-        filteredArticles = articles
-        if searchArticles.text == "" {
-                  isSearching = false
-            table_view.reloadData()
-              } else {
-                  isSearching = true
-                filteredArticles = articles!.filter({$0.contains(searchBar.text ?? "")})
-                   table_view.reloadData()
-              }
-        
+   
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.urlSelected = self.articles?[indexPath.row].urlWebsite ?? ""
     }
-        
     
-    
-    
-    
-    
-        
+    func updateSearchResults(for searchController: UISearchController) {
+        let searchBar = searchController.searchBar
+        filterContentForSearchText(searchBar.text!, articles!)
     }
     
     
     
+    func filterContentForSearchText(_ searchText:String ,_ category: [Articles]){
+        filteredArticles =  articles?.filter({ (article:Articles) -> Bool in
+            return article.description.lowercased().contains(searchText.lowercased())
+        })
+        table_view.reloadData()
+    }
+     
+        
+    }
     
-    
-    
-    
-    
-
-
-
 
 extension UIImageView {
     
@@ -205,5 +211,12 @@ extension UIImageView {
         task.resume()
     }
     
+    
+    
 }
+
+
+
+    
+  
 
