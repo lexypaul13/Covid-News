@@ -20,7 +20,7 @@ class LatestNewsViewController: UIViewController, UITableViewDataSource, UITable
     var articles: [Articles]? = [] // holds array of model object
     var filteredArticles:[Articles]! = [] //holds searched articles
     let searchController = UISearchController(searchResultsController: nil)
-
+     
     var isSearchBarEmpty: Bool {
       return searchController.searchBar.text?.isEmpty ?? true
     }
@@ -120,26 +120,27 @@ class LatestNewsViewController: UIViewController, UITableViewDataSource, UITable
     
     
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { //determines what data source should be used when user types
       
-        
-            return articles?.count ?? 0
+        if isFiltering{
+            return filteredArticles?.count ?? 0
+    }
+        return articles?.count ?? 0
 
-        
     }
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell1", for: indexPath) as! NewsTableViewCell
-        let news : Articles
         filteredArticles = articles
+        let news: Articles
 
         if isFiltering{
-            news = filteredArticles[indexPath.row]
+            news = filteredArticles![indexPath.row]
         }
         else{
-            newsData = articles![indexPath.row]
+            news = articles![indexPath.row]
         }
         cell.authorName.text = articles?[indexPath.row].author
         cell.headLine.text = articles?[indexPath.row].title
@@ -182,6 +183,7 @@ class LatestNewsViewController: UIViewController, UITableViewDataSource, UITable
     func filterContentForSearchText(_ searchText:String ,_ category: [Articles]){
         filteredArticles =  articles?.filter({ (article:Articles) -> Bool in
             return article.description.lowercased().contains(searchText.lowercased())
+            
         })
         table_view.reloadData()
     }
