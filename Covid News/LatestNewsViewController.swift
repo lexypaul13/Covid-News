@@ -10,10 +10,6 @@ import UIKit
 
 class LatestNewsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate,UISearchResultsUpdating  {
     
-    
- 
-    var newsData = Articles() //Model object
-    
     let urlRequest = "http://newsapi.org/v2/everything?q=coronavirus&sortBy=popularity&apiKey=d32071cd286c4f6b9c689527fc195b03&pageSize=50&page=2" //Website API
     var urlSelected = ""
     
@@ -133,21 +129,20 @@ class LatestNewsViewController: UIViewController, UITableViewDataSource, UITable
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell1", for: indexPath) as! NewsTableViewCell
-        filteredArticles = articles
-        let news: Articles
-
+        var news: Articles
+        var articlesToUse = articles
+       
         if isFiltering{
-            news = filteredArticles![indexPath.row]
+            articlesToUse = articles
+            
         }
-        else{
-            news = articles![indexPath.row]
-        }
-        cell.authorName.text = articles?[indexPath.row].author
-        cell.headLine.text = articles?[indexPath.row].title
-        cell.newsImage.downloadImage(from:(self.articles?[indexPath.item].urlImage ?? "nill"))
-        cell.timePublication.text = articles?[indexPath.row].publishedAt
-
-        if let dateString = articles?[indexPath.row].publishedAt,
+        news = articles![indexPath.row]
+        cell.authorName.text = articlesToUse?[indexPath.row].author
+        cell.headLine.text = articlesToUse?[indexPath.row].title
+        cell.newsImage.downloadImage(from:(articlesToUse?[indexPath.row].urlImage ?? "nill"))
+        cell.timePublication.text = news.publishedAt
+        
+        if let dateString = articlesToUse?[indexPath.row].publishedAt,
         let date = indDateFormatter.date(from: dateString){
                    let formattedString = outDateFormtter.string(from: date)
                    cell.timePublication.text = formattedString
@@ -182,11 +177,29 @@ class LatestNewsViewController: UIViewController, UITableViewDataSource, UITable
     
     func filterContentForSearchText(_ searchText:String ,_ category: [Articles]){
         filteredArticles =  articles?.filter({ (article:Articles) -> Bool in
-            return article.description.lowercased().contains(searchText.lowercased())
-            
+            return article.title!.lowercased().contains(searchText.lowercased())
+
         })
         table_view.reloadData()
     }
+    
+    
+    
+    
+    @IBAction func shareButton(_ sender: UIButton) {
+        
+        let buttonPosition = sender.convert(CGPoint.zero, to: self.table_view)
+        if let indexPath = self.table_view.indexPathForRow(at:buttonPosition) {
+            let newRelease = articles?[indexPath.row].urlWebsite
+            let activityVC = UIActivityViewController(activityItems:[newRelease ?? 0], applicationActivities: nil)
+            activityVC.popoverPresentationController?.sourceView = self.view
+            self.present(activityVC,animated: true, completion: nil)
+
+        }
+       
+
+    }
+    
      
         
     }

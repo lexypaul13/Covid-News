@@ -94,15 +94,10 @@
                                                         <constraint firstAttribute="height" constant="20" id="Bif-RK-XmQ"/>
                                                         <constraint firstAttribute="width" constant="20" id="gds-i3-1mh"/>
                                                     </constraints>
-                                                    <state key="normal" title="Button" image="bookmark" catalog="system"/>
-                                                </button>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Eyd-SB-mGE">
-                                                    <rect key="frame" x="65" y="123" width="20" height="20"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="20" id="MGe-mp-K44"/>
-                                                        <constraint firstAttribute="height" constant="20" id="dSx-OH-EpA"/>
-                                                    </constraints>
-                                                    <state key="normal" image="square.and.arrow.up.fill" catalog="system"/>
+                                                    <state key="normal" title="Button" image="square.and.arrow.up" catalog="system"/>
+                                                    <connections>
+                                                        <action selector="shareButton:" destination="IDY-bv-874" eventType="touchUpInside" id="KeV-co-HUD"/>
+                                                    </connections>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" lineBreakMode="clip" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AkU-wh-WuE">
                                                     <rect key="frame" x="115" y="122.5" width="10.5" height="20.5"/>
@@ -115,17 +110,15 @@
                                                 <constraint firstItem="AjZ-f3-lpk" firstAttribute="leading" secondItem="PEr-5e-9J2" secondAttribute="trailing" constant="10" id="4dC-QU-uZc"/>
                                                 <constraint firstItem="AjZ-f3-lpk" firstAttribute="top" secondItem="t8K-uO-heG" secondAttribute="top" constant="10" id="5Qb-zQ-blS"/>
                                                 <constraint firstItem="KAW-mi-cCC" firstAttribute="top" secondItem="t8K-uO-heG" secondAttribute="top" constant="5" id="5eP-Te-5pN"/>
+                                                <constraint firstItem="AkU-wh-WuE" firstAttribute="leading" secondItem="GjV-f3-hLM" secondAttribute="trailing" constant="80" id="8bR-ct-o3E"/>
                                                 <constraint firstItem="PEr-5e-9J2" firstAttribute="leading" secondItem="t8K-uO-heG" secondAttribute="leading" constant="15" id="8w3-j2-pkT"/>
                                                 <constraint firstItem="PEr-5e-9J2" firstAttribute="top" secondItem="KAW-mi-cCC" secondAttribute="bottom" constant="5" id="FNB-54-Dmt"/>
-                                                <constraint firstItem="AkU-wh-WuE" firstAttribute="leading" secondItem="Eyd-SB-mGE" secondAttribute="trailing" constant="30" id="Lje-yb-h5k"/>
                                                 <constraint firstItem="AjZ-f3-lpk" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="AkU-wh-WuE" secondAttribute="trailing" constant="8" symbolic="YES" id="MmV-DQ-zdy"/>
                                                 <constraint firstAttribute="bottom" secondItem="GjV-f3-hLM" secondAttribute="bottom" constant="20" id="Ony-VM-Fht"/>
                                                 <constraint firstItem="KAW-mi-cCC" firstAttribute="leading" secondItem="t8K-uO-heG" secondAttribute="leading" constant="15" id="W41-Nv-s6r"/>
                                                 <constraint firstItem="AjZ-f3-lpk" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="KAW-mi-cCC" secondAttribute="trailing" constant="8" symbolic="YES" id="aef-mk-zQl"/>
-                                                <constraint firstAttribute="bottom" secondItem="Eyd-SB-mGE" secondAttribute="bottom" constant="20" id="fO8-34-iMg"/>
                                                 <constraint firstItem="GjV-f3-hLM" firstAttribute="leading" secondItem="t8K-uO-heG" secondAttribute="leading" constant="15" id="fid-Vl-Tyj"/>
                                                 <constraint firstAttribute="bottom" secondItem="AkU-wh-WuE" secondAttribute="bottom" constant="20" id="hjK-ad-Myi"/>
-                                                <constraint firstItem="Eyd-SB-mGE" firstAttribute="leading" secondItem="GjV-f3-hLM" secondAttribute="trailing" constant="30" id="hkM-xH-43i"/>
                                                 <constraint firstAttribute="trailing" secondItem="AjZ-f3-lpk" secondAttribute="trailing" constant="15" id="olO-2S-wjO"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -160,7 +153,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Qz-wS-28V" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1911.2" y="-498.76847290640399"/>
+            <point key="canvasLocation" x="1910.144927536232" y="-498.88392857142856"/>
         </scene>
         <!--Article View Controller-->
         <scene sceneID="CjJ-Co-EZL">
@@ -267,10 +260,9 @@
         </scene>
     </scenes>
     <resources>
-        <image name="bookmark" catalog="system" width="112" height="128"/>
         <image name="clock" width="128" height="121"/>
         <image name="news25" width="25" height="25"/>
-        <image name="square.and.arrow.up.fill" catalog="system" width="115" height="128"/>
+        <image name="square.and.arrow.up" catalog="system" width="115" height="128"/>
         <systemColor name="scrollViewTexturedBackgroundColor">
             <color red="0.43529411764705878" green="0.44313725490196082" blue="0.47450980392156861" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
