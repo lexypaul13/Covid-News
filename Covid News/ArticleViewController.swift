@@ -18,7 +18,7 @@ class ArticleViewController: UIViewController {
         super.viewDidLoad()
         if let url = URL(string: url ) {
         let request = URLRequest(url: url)
-            articlePage.load(request)!
+            articlePage.load(request)
         // Do any additional setup after loading the view.
     }
 }
