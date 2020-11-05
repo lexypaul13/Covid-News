@@ -10,7 +10,8 @@ import UIKit
 
 class LatestNewsViewController: UIViewController {
     
- //Website API
+    //Website API
+    let website = "http://newsapi.org/v2/everything?q=coronavirus&sortBy=popularity&apiKey=d32071cd286c4f6b9c689527fc195b03&pageSize=50&page=2"
     var urlSelected = ""
     var news = ArticleManger()
     var filteredArticles:[ArticlesData]! = [] //holds searched articles
@@ -24,9 +25,9 @@ class LatestNewsViewController: UIViewController {
         return searchController.isActive && !isSearchBarEmpty
     }
     
-    //
+    
     @IBOutlet weak var table_view: UITableView!
-    //
+    
     let indDateFormatter =  ISO8601DateFormatter()
     let outDateFormtter : DateFormatter = {
         let df = DateFormatter()
@@ -38,11 +39,11 @@ class LatestNewsViewController: UIViewController {
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        news.fetchArticles()
+        news.performRequest()
 
         table_view.dataSource = self
         navigationController?.navigationBar.prefersLargeTitles = true
-
+        
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Search News"
@@ -85,10 +86,11 @@ extension LatestNewsViewController: UITableViewDataSource, UITableViewDelegate, 
         if isFiltering{
             articleToUse = news.articles?.count
         }
+        
         let row = news.articles?[indexPath.row]
         cell.authorName.text = row?.author
         cell.headLine.text = row?.title
-//         cell.newsImage.downloadImage(url:(row?.urlImage ?? "nill"))
+        //         cell.newsImage.downloadImage(url:(row?.urlImage ?? "nill"))
         cell.timePublication.text = row?.publishedAt
         if let dateString = news.articles?[indexPath.row].publishedAt,
            let date = indDateFormatter.date(from: dateString){
@@ -123,24 +125,21 @@ extension LatestNewsViewController: UITableViewDataSource, UITableViewDelegate, 
 }
 
 
-//extension UIImageView {
-//
-//    func downloadImage( url: String){
-//        let news = ArticleManger()
-//        news.performRequest(urlString: url)
-//        DispatchQueue.main.async {
-//            var image:Data
-//            self.image = UIImage(data: image)
-//        }
-//        
-//    }
-//
-//
-//
-//}
-
-
-
-
-  
-
+extension UIImageView {
+    
+    func downloadImage( url: String){
+        let news = ArticleManger()
+        news.performRequest()
+        
+        DispatchQueue.main.async {
+            
+        }
+        
+    }
+    
+    
+    
+    
+    
+    
+}

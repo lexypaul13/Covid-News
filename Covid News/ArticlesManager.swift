@@ -11,33 +11,35 @@ import Foundation
 
 
 class ArticleManger{
+    
     let website = "http://newsapi.org/v2/everything?q=coronavirus&sortBy=popularity&apiKey=d32071cd286c4f6b9c689527fc195b03&pageSize=50&page=2" //Website API
     var articles: [ArticlesData]? = [] // holds array of model object
 
-    func fetchArticles() {
-        performRequest(urlString: website)
-    }
     
-    
-    func performRequest(urlString: String){
-        if let url = URL(string: website) {
-            let session = URLSession(configuration: .default)
-            let task = session.dataTask(with: url) { (data, response, error) in
-                
-                if error != nil{
-                    print(error ?? 0)
-                    return
-                }
-                if let data = data {
-                    self.articles = self.parseData(data: data)
-                    
-                }
-                
-            }
-            task.resume()
+
+    func performRequest(){
+        guard let aritcleUrl = URL(string: website) else { //send a request to the server
             return
         }
-    }
+        let request = URLRequest(url: aritcleUrl)
+        let task = URLSession.shared.dataTask(with: request, completionHandler: { (data, response, error) -> Void in //collects content from website
+            if  error != nil { // checks if content is available
+                print(error ?? 0)
+                return
+            }
+            if let data = data {
+                self.articles = self.parseData(data: data)
+            }
+            
+            
+        })
+        
+        task.resume()
+        return
+        }
+    
+    
+    
     func parseData(data :Data)->[ArticlesData]?  {
         
         do {
@@ -56,8 +58,8 @@ class ArticleManger{
             }
             print(jsonArticles)
         }catch{
-           print("\(error)")
-            
+                print("\(error)")
+          
         }
         return articles ?? []
     }
