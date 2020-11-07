@@ -12,7 +12,7 @@ import Foundation
 
 class ArticleManger{
     
-    let website = "http://newsapi.org/v2/everything?q=coronavirus&sortBy=popularity&apiKey=d32071cd286c4f6b9c689527fc195b03&pageSize=50&page=2" //Website API
+    var website = "http://newsapi.org/v2/everything?q=coronavirus&sortBy=popularity&apiKey=d32071cd286c4f6b9c689527fc195b03&pageSize=50&page=2" //Website API
     var articles: [ArticlesData]? = [] // holds array of model object
 
     
@@ -35,28 +35,29 @@ class ArticleManger{
         })
         
         task.resume()
-        return
         }
     
     
     
     func parseData(data :Data)->[ArticlesData]?  {
-        
         do {
             let jsonResult = try JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.mutableContainers) as? NSDictionary
             
             let jsonArticles = jsonResult?["articles"] as? [AnyObject] ?? [] // gets first head of json file and converts it to dictionary
-            let article = ArticlesData()
             
             for jsonArticle in jsonArticles{ // captures data and stores it in the model object
+                let article = ArticlesData()
+
                 article.author = jsonArticle["author"] as? String
-                article.title = jsonArticle["description"] as? String
+                article.myDescription = jsonArticle["description"] as? String
                 article.publishedAt = jsonArticle["publishedAt"] as? String
                 article.urlImage = jsonArticle["urlToImage"] as? String
                 article.urlWebsite = jsonArticle["url"] as? String
                 articles?.append(article) //put article data in the array
             }
             print(jsonArticles)
+            let nc = NotificationCenter.default
+            nc.post(name: Notification.Name("didFinishParsing"), object: nil)
         }catch{
                 print("\(error)")
           

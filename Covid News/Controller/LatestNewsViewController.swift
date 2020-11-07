@@ -14,6 +14,8 @@ class LatestNewsViewController: UIViewController {
     let website = "http://newsapi.org/v2/everything?q=coronavirus&sortBy=popularity&apiKey=d32071cd286c4f6b9c689527fc195b03&pageSize=50&page=2"
     var urlSelected = ""
     var news = ArticleManger()
+    
+    lazy  var newsSelected =  news.articles
     var filteredArticles:[ArticlesData]! = [] //holds searched articles
     
     let searchController = UISearchController(searchResultsController: nil)
@@ -40,10 +42,9 @@ class LatestNewsViewController: UIViewController {
         
         super.viewDidLoad()
         news.performRequest()
-
+    NotificationCenter.default.addObserver(self, selector: #selector(refreshTableView), name: Notification.Name("didFinishParsing"), object: nil)
         table_view.dataSource = self
         navigationController?.navigationBar.prefersLargeTitles = true
-        
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Search News"
@@ -81,18 +82,17 @@ extension LatestNewsViewController: UITableViewDataSource, UITableViewDelegate, 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell1", for: indexPath) as! NewsTableViewCell
-        var articleToUse = news.articles?.count
+        
+        var articleToUse = news.articles
         
         if isFiltering{
-            articleToUse = news.articles?.count
+            articleToUse = news.articles
         }
         
-        let row = news.articles?[indexPath.row]
-        cell.authorName.text = row?.author
-        cell.headLine.text = row?.title
+        cell.authorName.text = articleToUse?[indexPath.row].author
+        cell.headLine.text = articleToUse?[indexPath.row].myDescription
         //         cell.newsImage.downloadImage(url:(row?.urlImage ?? "nill"))
-        cell.timePublication.text = row?.publishedAt
-        if let dateString = news.articles?[indexPath.row].publishedAt,
+        if let dateString = articleToUse?[indexPath.row].publishedAt,
            let date = indDateFormatter.date(from: dateString){
             let formattedString = outDateFormtter.string(from: date)
             cell.timePublication.text = formattedString
@@ -104,6 +104,26 @@ extension LatestNewsViewController: UITableViewDataSource, UITableViewDelegate, 
     }
     
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.urlSelected = newsSelected?[indexPath.row].urlWebsite ?? ""
+    }
+    
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "article"{
+            if table_view.indexPathForSelectedRow != nil{
+                let destinationController = segue.destination as! ArticleViewController
+                destinationController.url = self.urlSelected
+            }
+        }
+    }
+  
+    @objc func refreshTableView() {
+            DispatchQueue.main.async {
+                self.table_view.reloadData()
+            }
+        }
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 163
     }
@@ -111,12 +131,13 @@ extension LatestNewsViewController: UITableViewDataSource, UITableViewDelegate, 
     
     func updateSearchResults(for searchController: UISearchController) {
         let searchBar = searchController.searchBar
-        filterContentForSearchText(searchBar.text!, filteredArticles)
+        filterContentForSearchText(searchBar.text!, news.articles!)
     }
     
     func filterContentForSearchText(_ searchText:String ,_ category: [ArticlesData]){
         filteredArticles =  news.articles?.filter({ (article:ArticlesData) -> Bool in
-            return article.title!.lowercased().contains(searchText.lowercased())
+            return (article.title?.lowercased().contains(searchText.lowercased()) ?? false)
+
             
         })
         table_view.reloadData()
