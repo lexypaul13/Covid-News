@@ -14,7 +14,7 @@ class LatestNewsViewController: UIViewController {
     let website = "http://newsapi.org/v2/everything?q=coronavirus&sortBy=popularity&apiKey=d32071cd286c4f6b9c689527fc195b03&pageSize=50&page=2"
     var urlSelected = ""
     var news = ArticleManger()
-    
+
     var filteredArticles:[ArticlesData]! = [] //holds searched articles
     let searchController = UISearchController(searchResultsController: nil)//sets current view to display search results
     
@@ -43,6 +43,7 @@ class LatestNewsViewController: UIViewController {
     NotificationCenter.default.addObserver(self, selector: #selector(refreshTableView), name: Notification.Name("didFinishParsing"), object: nil)
         tableView.dataSource = self
         tableView.delegate = self
+        
         navigationController?.navigationBar.prefersLargeTitles = true
         searchController.searchResultsUpdater = self //informs class of  any text changes within the searchBar.
         searchController.obscuresBackgroundDuringPresentation = false
@@ -107,18 +108,22 @@ extension LatestNewsViewController: UITableViewDataSource, UITableViewDelegate, 
     
     //shows website that correpsonds to selected table cell
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let stories = news.articles
-
-        self.urlSelected = stories?[indexPath.row].urlWebsite ?? ""
+       
+        performSegue(withIdentifier: "articles", sender: self)
+        
    }
 
+    
+    
     // perform transition to safari webview
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "article"{
-            if tableView.indexPathForSelectedRow != nil{
+        let stories = news.articles
+
+        if segue.identifier == "articles"{
+          
                 let destinationController = segue.destination as! ArticleViewController
-                destinationController.url = self.urlSelected
-            }
+                destinationController.website = stories![(tableView.indexPathForSelectedRow?.row)!]
+            
         }
     }
   

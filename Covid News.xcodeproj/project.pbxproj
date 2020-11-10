@@ -148,9 +148,9 @@
 			children = (
 				57D4B9EF24EF6D97003002DC /* AppDelegate.swift */,
 				57D4B9F124EF6D97003002DC /* SceneDelegate.swift */,
+				5749DC3C2553C8A000B49518 /* Model */,
 				5749DC442553C8D600B49518 /* View */,
 				5749DC402553C8BA00B49518 /* Controller */,
-				5749DC3C2553C8A000B49518 /* Model */,
 				57D4B9FA24EF6D98003002DC /* LaunchScreen.storyboard */,
 				57D4B9FD24EF6D98003002DC /* Info.plist */,
 				57F2D28D24F0CD270075CB62 /* Assets.xcassets */,

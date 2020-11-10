@@ -81,7 +81,7 @@
                                                     </constraints>
                                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large"/>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="TopLeft" horizontalHuggingPriority="251" verticalCompressionResistancePriority="749" text="Amazon's share of the US e-commerce market is now 49%, or 5% of all retail spend" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="none" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PEr-5e-9J2">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="TopLeft" horizontalHuggingPriority="251" verticalCompressionResistancePriority="749" text="Amazon's share of the US e-commerce market is now 49%, or 5% of all retail spend" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="none" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PEr-5e-9J2">
                                                     <rect key="frame" x="15" y="29" width="234" height="55.5"/>
                                                     <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="16"/>
                                                     <nil key="textColor"/>
@@ -127,7 +127,7 @@
                                             <outlet property="headLine" destination="PEr-5e-9J2" id="QkY-9o-Ssy"/>
                                             <outlet property="newsImage" destination="AjZ-f3-lpk" id="jc7-7l-fUP"/>
                                             <outlet property="timePublication" destination="AkU-wh-WuE" id="zMh-Gd-JVu"/>
-                                            <segue destination="Unx-td-tnF" kind="show" identifier="article" id="vDN-L4-NRE"/>
+                                            <segue destination="Unx-td-tnF" kind="show" identifier="articles" id="zYR-Ua-cXx"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -181,7 +181,6 @@
                             <constraint firstItem="KKy-PZ-yjy" firstAttribute="leading" secondItem="iP6-N3-bxD" secondAttribute="leading" id="k6u-oD-F7r"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" leftItemsSupplementBackButton="YES" id="JbF-4b-OTl"/>
                     <connections>
                         <outlet property="articlePage" destination="KKy-PZ-yjy" id="zb5-Vy-bEb"/>
                     </connections>
