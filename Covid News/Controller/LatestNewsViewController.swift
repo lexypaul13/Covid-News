@@ -15,12 +15,10 @@ class LatestNewsViewController: UIViewController {
     var urlSelected = ""
     var news = ArticleManger()
     
-    lazy  var newsSelected =  news.articles
     var filteredArticles:[ArticlesData]! = [] //holds searched articles
+    let searchController = UISearchController(searchResultsController: nil)//sets current view to display search results
     
-    let searchController = UISearchController(searchResultsController: nil)
-    
-    var isSearchBarEmpty: Bool {
+    var isSearchBarEmpty: Bool { // return true if search bar is empty
         return searchController.searchBar.text?.isEmpty ?? true
     }
     var isFiltering: Bool {
@@ -28,8 +26,8 @@ class LatestNewsViewController: UIViewController {
     }
     
     
-    @IBOutlet weak var table_view: UITableView!
-    
+    @IBOutlet weak var tableView: UITableView!
+
     let indDateFormatter =  ISO8601DateFormatter()
     let outDateFormtter : DateFormatter = {
         let df = DateFormatter()
@@ -43,19 +41,20 @@ class LatestNewsViewController: UIViewController {
         super.viewDidLoad()
         news.performRequest()
     NotificationCenter.default.addObserver(self, selector: #selector(refreshTableView), name: Notification.Name("didFinishParsing"), object: nil)
-        table_view.dataSource = self
+        tableView.dataSource = self
+        tableView.delegate = self
         navigationController?.navigationBar.prefersLargeTitles = true
-        searchController.searchResultsUpdater = self
+        searchController.searchResultsUpdater = self //informs class of  any text changes within the searchBar.
         searchController.obscuresBackgroundDuringPresentation = false
-        searchController.searchBar.placeholder = "Search News"
-        navigationItem.searchController = searchController
-        definesPresentationContext = true
+        searchController.searchBar.placeholder = "Search News" //sets place holder name
+        navigationItem.searchController = searchController //adds sreach bar to navigation item
+        definesPresentationContext = true //ensures that search bar doesnt remain on screen when user moves to another screemn
     }
     
     @IBAction func shareButton(_ sender: UIButton) {
         
-        let buttonPosition = sender.convert(CGPoint.zero, to: self.table_view)
-        if let indexPath = self.table_view.indexPathForRow(at:buttonPosition) {
+        let buttonPosition = sender.convert(CGPoint.zero, to: self.tableView)
+        if let indexPath = self.tableView.indexPathForRow(at:buttonPosition) {
             let newRelease = news.articles?[indexPath.row].urlWebsite
             let activityVC = UIActivityViewController(activityItems:[newRelease ?? 0], applicationActivities: nil)
             activityVC.popoverPresentationController?.sourceView = self.view
@@ -70,7 +69,8 @@ class LatestNewsViewController: UIViewController {
 
 
 extension LatestNewsViewController: UITableViewDataSource, UITableViewDelegate, UISearchResultsUpdating{
-    
+
+    // determines what type of data
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if isFiltering{
             return filteredArticles?.count ?? 0
@@ -78,21 +78,23 @@ extension LatestNewsViewController: UITableViewDataSource, UITableViewDelegate, 
         return news.articles?.count ?? 0
         
     }
-    
+    //displays contents of  json file on table cells  and filters for search results
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell1", for: indexPath) as! NewsTableViewCell
-        
-        var articleToUse = news.articles
+        let stories = news.articles
+        var news: ArticlesData
         
         if isFiltering{
-            articleToUse = news.articles
+            news = filteredArticles![indexPath.row]
         }
-        
-        cell.authorName.text = articleToUse?[indexPath.row].author
-        cell.headLine.text = articleToUse?[indexPath.row].myDescription
-        //         cell.newsImage.downloadImage(url:(row?.urlImage ?? "nill"))
-        if let dateString = articleToUse?[indexPath.row].publishedAt,
+        else {
+            news = stories![indexPath.row]
+        }
+        cell.authorName.text = news.author
+        cell.headLine.text = news.myDescription
+        cell.newsImage.downloadImage(from:(news.urlImage ?? "nill"))
+        if let dateString = news.publishedAt,
            let date = indDateFormatter.date(from: dateString){
             let formattedString = outDateFormtter.string(from: date)
             cell.timePublication.text = formattedString
@@ -103,15 +105,17 @@ extension LatestNewsViewController: UITableViewDataSource, UITableViewDelegate, 
         return cell
     }
     
-    
+    //shows website that correpsonds to selected table cell
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.urlSelected = newsSelected?[indexPath.row].urlWebsite ?? ""
-    }
-    
-    
+        let stories = news.articles
+
+        self.urlSelected = stories?[indexPath.row].urlWebsite ?? ""
+   }
+
+    // perform transition to safari webview
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "article"{
-            if table_view.indexPathForSelectedRow != nil{
+            if tableView.indexPathForSelectedRow != nil{
                 let destinationController = segue.destination as! ArticleViewController
                 destinationController.url = self.urlSelected
             }
@@ -120,44 +124,53 @@ extension LatestNewsViewController: UITableViewDataSource, UITableViewDelegate, 
   
     @objc func refreshTableView() {
             DispatchQueue.main.async {
-                self.table_view.reloadData()
+                self.tableView.reloadData()
             }
         }
-    
+    // increses table row height
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 163
     }
     
     
-    func updateSearchResults(for searchController: UISearchController) {
+    func updateSearchResults(for searchController: UISearchController) { // updates search result from text typed from the user 
         let searchBar = searchController.searchBar
         filterContentForSearchText(searchBar.text!, news.articles!)
     }
-    
+    // filters through articles to find matching results and reloadsa table view
     func filterContentForSearchText(_ searchText:String ,_ category: [ArticlesData]){
         filteredArticles =  news.articles?.filter({ (article:ArticlesData) -> Bool in
-            return (article.title?.lowercased().contains(searchText.lowercased()) ?? false)
+            return (article.myDescription?.lowercased().contains(searchText.lowercased()) ?? false)
 
             
         })
-        table_view.reloadData()
+        tableView.reloadData()
     }
     
 }
 
 
-extension UIImageView {
+extension  UIImageView {
     
-    func downloadImage( url: String){
-        let news = ArticleManger()
-        news.performRequest()
+    //downloads images asynchronous
+    func downloadImage(from url: String){
         
-        DispatchQueue.main.async {
+        let urlRequest = URLRequest(url: URL(string: url)!)
+        
+        let task = URLSession.shared.dataTask(with: urlRequest) { (data,response,error) in
             
+            if error != nil {
+                print(error ?? 0)
+                return
+            }
+            
+            DispatchQueue.main.async {
+                self.image = UIImage(data: data!)
+                
+            }
         }
-        
+        task.resume()
     }
-    
     
     
     
