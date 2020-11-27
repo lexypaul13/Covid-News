@@ -6,16 +6,16 @@
 //  Copyright © 2020 Alexander Paul. All rights reserved.
 //
 
-import Foundation
-
+import UIKit
+import CoreData
 
 
 class ArticleManger{
     
     var website = "http://newsapi.org/v2/everything?q=coronavirus&sortBy=popularity&apiKey=d32071cd286c4f6b9c689527fc195b03&pageSize=50&page=2" //Website API
     var articles: [ArticlesData]? = [] // holds array of model object
-
-    
+    var news: [News] = []
+ 
 
     func performRequest(){
         guard let aritcleUrl = URL(string: website) else { //send a request to the server
@@ -64,5 +64,15 @@ class ArticleManger{
         }
         return articles ?? []
     }
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
     
 }

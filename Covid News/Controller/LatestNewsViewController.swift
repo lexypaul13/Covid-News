@@ -7,11 +7,10 @@
 //
 
 import UIKit
-
+import CoreData
 class LatestNewsViewController: UIViewController {
     
     //Website API
-    let website = "http://newsapi.org/v2/everything?q=coronavirus&sortBy=popularity&apiKey=d32071cd286c4f6b9c689527fc195b03&pageSize=50&page=2"
     var urlSelected = ""
     var news = ArticleManger()
 
@@ -52,6 +51,10 @@ class LatestNewsViewController: UIViewController {
         definesPresentationContext = true //ensures that search bar doesnt remain on screen when user moves to another screemn
     }
     
+    
+
+    
+    
     @IBAction func shareButton(_ sender: UIButton) {
         
         let buttonPosition = sender.convert(CGPoint.zero, to: self.tableView)
@@ -70,6 +73,9 @@ class LatestNewsViewController: UIViewController {
 
 
 extension LatestNewsViewController: UITableViewDataSource, UITableViewDelegate, UISearchResultsUpdating{
+
+  
+    
 
     // determines what type of data
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -107,10 +113,8 @@ extension LatestNewsViewController: UITableViewDataSource, UITableViewDelegate, 
     }
     
     //shows website that correpsonds to selected table cell
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-       
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {       
         performSegue(withIdentifier: "articles", sender: self)
-        
    }
 
     
@@ -130,18 +134,29 @@ extension LatestNewsViewController: UITableViewDataSource, UITableViewDelegate, 
     @objc func refreshTableView() {
             DispatchQueue.main.async {
                 self.tableView.reloadData()
+                
             }
         }
     // increses table row height
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 163
     }
-    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let save =  UIContextualAction(style: .normal, title: "Save") { (action, view, completionHandler) in
+            completionHandler(true)
+            CoreDataManger.sharedInstance.createData()
+    }
+        save.backgroundColor = .systemBlue
+
+        let swipe =  UISwipeActionsConfiguration(actions: [save])
+        return swipe
+    }
     
     func updateSearchResults(for searchController: UISearchController) { // updates search result from text typed from the user 
         let searchBar = searchController.searchBar
         filterContentForSearchText(searchBar.text!, news.articles!)
     }
+    
     // filters through articles to find matching results and reloadsa table view
     func filterContentForSearchText(_ searchText:String ,_ category: [ArticlesData]){
         filteredArticles =  news.articles?.filter({ (article:ArticlesData) -> Bool in
