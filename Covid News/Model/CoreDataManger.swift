@@ -34,12 +34,12 @@ class CoreDataManger: NSObject {
         for article in newsCoreData{
         let news = NSManagedObject(entity: newsEntity, insertInto: managedContext)
             
-         news.setValue("Ankur\(article.author ?? "")", forKeyPath: "author")
-         news.setValue("Ankur\(article.myDescription ?? "")", forKeyPath: "myDescription")
-         news.setValue("Ankur\(article.publishAt ?? "")", forKeyPath: "publishAt")
-         news.setValue("Ankur\(article.title ?? "")", forKeyPath: "title")
-         news.setValue("Ankur\(article.urlImage ?? "")", forKeyPath: "urlImage")
-         news.setValue("Ankur\(article.urlWebsite ?? "")", forKeyPath: "urlWebsite")
+         news.setValue("\(article.author ?? "")", forKeyPath: "author")
+         news.setValue("\(article.myDescription ?? "")", forKeyPath: "myDescription")
+         news.setValue("\(article.publishAt ?? "")", forKeyPath: "publishAt")
+         news.setValue("\(article.title ?? "")", forKeyPath: "title")
+         news.setValue("\(article.urlImage ?? "")", forKeyPath: "urlImage")
+         news.setValue("\(article.urlWebsite ?? "")", forKeyPath: "urlWebsite")
           
         }
         
