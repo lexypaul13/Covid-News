@@ -36,7 +36,8 @@ class LatestNewsViewController: UIViewController {
     }()
     
     override func viewDidLoad() {
-        
+        print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
+
         super.viewDidLoad()
         news.performRequest()
     NotificationCenter.default.addObserver(self, selector: #selector(refreshTableView), name: Notification.Name("didFinishParsing"), object: nil)

@@ -54,6 +54,7 @@ class CoreDataManger: NSObject {
         print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
 
     }
+    
 }
 
 
