@@ -29,6 +29,8 @@ class ArticleManger{
             }
             if let data = data {
                 self.articles = self.parseData(data: data)
+                CoreDataManger.sharedInstance.createData()
+
             }
             
             
@@ -55,8 +57,7 @@ class ArticleManger{
                 article.urlWebsite = jsonArticle["url"] as? String
                 articles?.append(article) //put article data in the array
             }
-            print(jsonArticles)
-            let nc = NotificationCenter.default
+             let nc = NotificationCenter.default
             nc.post(name: Notification.Name("didFinishParsing"), object: nil)
         }catch{
                 print("\(error)")

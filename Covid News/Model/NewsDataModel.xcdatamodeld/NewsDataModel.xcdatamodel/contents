@@ -3,7 +3,7 @@
     <entity name="News" representedClassName=".News" syncable="YES">
         <attribute name="author" attributeType="String"/>
         <attribute name="myDescription" attributeType="String"/>
-        <attribute name="publishAt" attributeType="String"/>
+        <attribute name="publishedAt" attributeType="String"/>
         <attribute name="title" attributeType="String"/>
         <attribute name="urlImage" attributeType="String"/>
         <attribute name="urlWebsite" attributeType="String"/>

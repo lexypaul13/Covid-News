@@ -145,7 +145,9 @@ extension LatestNewsViewController: UITableViewDataSource, UITableViewDelegate, 
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let save =  UIContextualAction(style: .normal, title: "Save") { (action, view, completionHandler) in
             completionHandler(true)
-            CoreDataManger.sharedInstance.createData()
+            
+                CoreDataManger.sharedInstance.createData()
+            
     }
         save.backgroundColor = .systemBlue
 
