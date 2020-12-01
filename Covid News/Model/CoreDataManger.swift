@@ -17,7 +17,6 @@ class CoreDataManger: NSObject {
     var newsCoreData: [News] = []
     var article = ArticlesData()
  
-    
     // MARK: - Core Data Saving support
     
     func createData(){
@@ -31,13 +30,12 @@ class CoreDataManger: NSObject {
         
         //Now let’s create an entity and new user records.
         let newsEntity = NSEntityDescription.entity(forEntityName: "News", in: managedContext)!
-       
-            for article in self.newsCoreData{
         let news = NSManagedObject(entity: newsEntity, insertInto: managedContext)
-            
+
+        for article in self.newsCoreData{
          news.setValue("\(article.author ?? "")", forKeyPath: "author")
          news.setValue("\(article.myDescription ?? "")", forKeyPath: "myDescription")
-         news.setValue("\(article.publishedAt ?? "")", forKeyPath: "publishAt")
+         news.setValue("\(article.publishedAt ?? "")", forKeyPath: "publishedAt")
          news.setValue("\(article.title ?? "")", forKeyPath: "title")
          news.setValue("\(article.urlImage ?? "")", forKeyPath: "urlImage")
          news.setValue("\(article.urlWebsite ?? "")", forKeyPath: "urlWebsite")
@@ -48,7 +46,8 @@ class CoreDataManger: NSObject {
         
         do {
             try managedContext.save()
-           
+            newsCoreData.append(news as! News)
+            
         } catch let error as NSError {
             print("Could not save. \(error), \(error.userInfo)")
         }

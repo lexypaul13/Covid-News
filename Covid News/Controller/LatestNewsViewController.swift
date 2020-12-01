@@ -40,7 +40,7 @@ class LatestNewsViewController: UIViewController {
 
         super.viewDidLoad()
         news.performRequest()
-    NotificationCenter.default.addObserver(self, selector: #selector(refreshTableView), name: Notification.Name("didFinishParsing"), object: nil)
+     NotificationCenter.default.addObserver(self, selector: #selector(refreshTableView), name: Notification.Name("didFinishParsing"), object: nil)
         tableView.dataSource = self
         tableView.delegate = self
         
