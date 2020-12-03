@@ -138,12 +138,14 @@ extension LatestNewsViewController: UITableViewDataSource, UITableViewDelegate, 
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     return 163
   }
+  
+  /// Save article by swiping left
   func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-    let save =  UIContextualAction(style: .normal, title: "Save") { (action, view, completionHandler) in
+    
+    let save = UIContextualAction(style: .normal, title: "Save") { (action, view, completionHandler) in
       completionHandler(true)
-      
-      CoreDataManger.sharedInstance.createData()
-      
+      guard let article = self.news.articles?[indexPath.row] else { return }
+      CoreDataManger.sharedInstance.saveArticle(article: article)
     }
     save.backgroundColor = .systemBlue
     
