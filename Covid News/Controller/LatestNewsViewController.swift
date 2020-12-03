@@ -17,7 +17,7 @@ class LatestNewsViewController: UIViewController {
   var urlSelected = ""
   var news = ArticleManger()
   
-  var filteredArticles:[ArticlesData]! = [] //holds searched articles
+  var filteredArticles: [ArticlesData]! = [] //holds searched articles
   let searchController = UISearchController(searchResultsController: nil)//sets current view to display search results
   
   var isSearchBarEmpty: Bool { // return true if search bar is empty
@@ -28,7 +28,7 @@ class LatestNewsViewController: UIViewController {
   }
   
   let indDateFormatter =  ISO8601DateFormatter()
-  let outDateFormtter : DateFormatter = {
+  let outDateFormtter: DateFormatter = {
     let df = DateFormatter()
     df.dateFormat = "dd-MM-yyyy"
     df.locale = Locale(identifier: "en_US_POSIX")
@@ -47,10 +47,11 @@ class LatestNewsViewController: UIViewController {
   
   @IBOutlet weak var tableView: UITableView!
   
+  // MARK: - Lifecycle
+  
   override func viewDidLoad() {
-    print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
-    
     super.viewDidLoad()
+    
     news.performRequest()
     NotificationCenter.default.addObserver(self, selector: #selector(refreshTableView), name: Notification.Name("didFinishParsing"), object: nil)
     tableView.dataSource = self
@@ -69,12 +70,11 @@ class LatestNewsViewController: UIViewController {
   @IBAction func shareButton(_ sender: UIButton) {
     
     let buttonPosition = sender.convert(CGPoint.zero, to: self.tableView)
-    if let indexPath = self.tableView.indexPathForRow(at:buttonPosition) {
+    if let indexPath = self.tableView.indexPathForRow(at: buttonPosition) {
       let newRelease = news.articles?[indexPath.row].urlWebsite
-      let activityVC = UIActivityViewController(activityItems:[newRelease ?? 0], applicationActivities: nil)
+      let activityVC = UIActivityViewController(activityItems: [newRelease ?? 0], applicationActivities: nil)
       activityVC.popoverPresentationController?.sourceView = self.view
-      self.present(activityVC,animated: true, completion: nil)
-      
+      self.present(activityVC, animated: true, completion: nil)
     }
   }
   
@@ -86,7 +86,7 @@ extension LatestNewsViewController: UITableViewDataSource, UITableViewDelegate, 
   
   // determines what type of data
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    if isFiltering{
+    if isFiltering {
       return filteredArticles?.count ?? 0
     }
     return news.articles?.count ?? 0
@@ -107,9 +107,9 @@ extension LatestNewsViewController: UITableViewDataSource, UITableViewDelegate, 
     
     cell.authorName.text = news.author
     cell.headLine.text = news.myDescription
-    cell.newsImage.downloadImage(from:(news.urlImage ?? "nill"))
+    cell.newsImage.downloadImage(from: (news.urlImage ?? "nill"))
     if let dateString = news.publishedAt,
-       let date = indDateFormatter.date(from: dateString){
+       let date = indDateFormatter.date(from: dateString) {
       let formattedString = outDateFormtter.string(from: date)
       cell.timePublication.text = formattedString
     } else {
@@ -142,7 +142,7 @@ extension LatestNewsViewController: UITableViewDataSource, UITableViewDelegate, 
   /// Save article by swiping left
   func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
     
-    let save = UIContextualAction(style: .normal, title: "Save") { (action, view, completionHandler) in
+    let save = UIContextualAction(style: .normal, title: "Save") { (_, _, completionHandler) in
       completionHandler(true)
       guard let article = self.news.articles?[indexPath.row] else { return }
       CoreDataManger.sharedInstance.saveArticle(article: article)
@@ -159,11 +159,9 @@ extension LatestNewsViewController: UITableViewDataSource, UITableViewDelegate, 
   }
   
   // filters through articles to find matching results and reloadsa table view
-  func filterContentForSearchText(_ searchText:String ,_ category: [ArticlesData]){
-    filteredArticles =  news.articles?.filter({ (article:ArticlesData) -> Bool in
+  func filterContentForSearchText(_ searchText: String, _ category: [ArticlesData]) {
+    filteredArticles =  news.articles?.filter({ (article: ArticlesData) -> Bool in
       return (article.myDescription?.lowercased().contains(searchText.lowercased()) ?? false)
-      
-      
     })
     tableView.reloadData()
   }
@@ -172,10 +170,10 @@ extension LatestNewsViewController: UITableViewDataSource, UITableViewDelegate, 
 
 extension UIImageView {
   
-  // downloads images asynchronous
-  func downloadImage(from url: String){
+  /// downloads images asynchronous
+  func downloadImage(from url: String) {
     let urlRequest = URLRequest(url: URL(string: url)!)
-    let task = URLSession.shared.dataTask(with: urlRequest) { (data,response,error) in
+    let task = URLSession.shared.dataTask(with: urlRequest) { (data, _, error) in
       if error != nil {
         print(error ?? 0)
         return

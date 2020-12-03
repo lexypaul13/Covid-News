@@ -6,6 +6,7 @@ disabled_rules:
   - todo
   - unused_optional_binding
   - empty_count
+  - force_cast
   
 # Some rules are turned off by default, so you need to opt-in -> run `swiftlint rules` to see all rules
 opt_in_rules:

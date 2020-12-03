@@ -73,7 +73,7 @@ class CoreDataManger: NSObject {
       let newsEntity = NSEntityDescription.entity(forEntityName: "News", in: managedContext)!
       let news = NSManagedObject(entity: newsEntity, insertInto: managedContext)
       
-      for article in self.newsCoreData{
+      for article in self.newsCoreData {
         news.setValue("\(article.author ?? "")", forKeyPath: "author")
         news.setValue("\(article.myDescription ?? "")", forKeyPath: "myDescription")
         news.setValue("\(article.publishedAt ?? "")", forKeyPath: "publishedAt")
