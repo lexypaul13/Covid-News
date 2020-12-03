@@ -58,8 +58,6 @@ class CoreDataManger: NSObject {
     print("Core Data DB Path: \(path ?? "Not found")")
   }
   
-  
-  
   // MARK: - Core Data Saving support
   
   func createData() {
