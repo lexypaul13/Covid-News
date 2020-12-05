@@ -9,20 +9,18 @@
 import UIKit
 import WebKit
 class ArticleViewController: UIViewController {
-
-    @IBOutlet weak var articlePage: WKWebView!
-    var website : ArticlesData?
+  
+  @IBOutlet weak var articlePage: WKWebView!
+  var website: ArticlesData?
+  
+  override func viewDidLoad() {
+    super.viewDidLoad()
     
-    
-    override func viewDidLoad() {
-        
-        super.viewDidLoad()
-        if let url = URL(string: website?.urlWebsite ?? "" ) {
-        let request = URLRequest(url: url)
-            articlePage.load(request)
-        // Do any additional setup after loading the view.
+    if let url = URL(string: website?.urlWebsite ?? "" ) {
+      let request = URLRequest(url: url)
+      articlePage.load(request)
+      // Do any additional setup after loading the view.
     }
-}
-    
-    
+  }
+  
 }

@@ -7,16 +7,12 @@
 //
 
 import Foundation
-class ArticlesData: NSObject {
-    var author: String?
-    var title: String?
-    var myDescription: String?
-    var publishedAt: String?
-    var urlImage: String?
-    var urlWebsite : String?
-    
-    
-    
-    
-}
 
+class ArticlesData: NSObject {
+  var author: String?
+  var title: String?
+  var myDescription: String?
+  var publishedAt: String?
+  var urlImage: String?
+  var urlWebsite: String?
+}
