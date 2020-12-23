@@ -12,10 +12,10 @@ import CoreData
 class CoreDataManger: NSObject {
   
   // MARK: - Properties
-  
   static let sharedInstance = CoreDataManger()
+    
   let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-  let persistentContainer = (UIApplication.shared.delegate as! AppDelegate).persistentContainer
+  //let persistentContainer = (UIApplication.shared.delegate as! AppDelegate).persistentContainer
   
   var newsCoreData: [News] = []
   var article = ArticlesData()
@@ -46,6 +46,28 @@ class CoreDataManger: NSObject {
     }
   }
   
+    func loadArticles()-> NSFetchRequest<NSFetchRequestResult>{
+         let fetchRequest =  NSFetchRequest<NSFetchRequestResult>(entityName: "News")
+         fetchRequest.fetchLimit = newsCoreData.count
+         let sortDescriptor = NSSortDescriptor(key: "publishedAt", ascending: true)
+         fetchRequest.sortDescriptors = [sortDescriptor]
+
+         return fetchRequest
+    }
+
+    
+   /** func loadArticles()->NSFetchedResultsController<NSFetchRequestResult>{
+        let fetchRequest = NSFetchRequest<News>(entityName: "News")
+        do{
+            let fetchedResults = try context.fetch(fetchRequest)
+         }catch let error as NSError {
+            // something went wrong, print the error.
+            print(error.description)
+        }
+        
+    } **/
+    
+    
   /// Prints the Core Data path and can be viewed in Finder
   func printCoreDataDBPath() {
     let path = FileManager
@@ -58,43 +80,7 @@ class CoreDataManger: NSObject {
     print("Core Data DB Path: \(path ?? "Not found")")
   }
   
-  // MARK: - Core Data Saving support
   
-  func createData() {
-    
-    //As we know that container is set up in the AppDelegates so we need to refer that container.
-    DispatchQueue.main.async(execute: { [self] in
-      guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
-      
-      //We need to create a context from this container
-      let managedContext = appDelegate.persistentContainer.viewContext
-      
-      //Now let’s create an entity and new user records.
-      let newsEntity = NSEntityDescription.entity(forEntityName: "News", in: managedContext)!
-      let news = NSManagedObject(entity: newsEntity, insertInto: managedContext)
-      
-      for article in self.newsCoreData {
-        news.setValue("\(article.author ?? "")", forKeyPath: "author")
-        news.setValue("\(article.myDescription ?? "")", forKeyPath: "myDescription")
-        news.setValue("\(article.publishedAt ?? "")", forKeyPath: "publishedAt")
-        news.setValue("\(article.title ?? "")", forKeyPath: "title")
-        news.setValue("\(article.urlImage ?? "")", forKeyPath: "urlImage")
-        news.setValue("\(article.urlWebsite ?? "")", forKeyPath: "urlWebsite")
-        
-      }
-      
-      //Now we have set all the values. The next step is to save them inside the Core Data
-      
-      do {
-        try managedContext.save()
-        newsCoreData.append(news as! News)
-        
-      } catch let error as NSError {
-        print("Could not save. \(error), \(error.userInfo)")
-      }
-      print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
-      
-    }
-    )}
+   
   
 }

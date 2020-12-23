@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="2aS-Pf-N0M">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="2aS-Pf-N0M">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -12,7 +12,7 @@
         <!--Saved-->
         <scene sceneID="gbK-bl-hR2">
             <objects>
-                <viewController id="9rh-PQ-j8E" sceneMemberID="viewController">
+                <viewController id="9rh-PQ-j8E" customClass="SaveViewController" customModule="Covid_News" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8xm-KW-KRL">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -21,13 +21,72 @@
                                 <rect key="frame" x="0.0" y="88" width="414" height="725"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="tP8-xB-Nor">
-                                        <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell2" rowHeight="162" id="tP8-xB-Nor" customClass="SaveTableViewCell" customModule="Covid_News" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="162"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="tP8-xB-Nor" id="XJU-37-DEQ">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="162"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="J8R-Kd-Nyh">
+                                                    <rect key="frame" x="253.5" y="11" width="140" height="140"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="140" id="7P6-m2-qob"/>
+                                                        <constraint firstAttribute="height" constant="140" id="siF-bB-NWu"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Washington Post" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="57L-Td-h1u">
+                                                    <rect key="frame" x="15" y="5" width="122.5" height="19"/>
+                                                    <fontDescription key="fontDescription" name="TimesNewRomanPS-BoldMT" family="Times New Roman" pointSize="17"/>
+                                                    <color key="textColor" red="0.1723507671" green="0.54395875599999999" blue="0.98655849699999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OdR-a9-OKf">
+                                                    <rect key="frame" x="15" y="122" width="19" height="21"/>
+                                                    <state key="normal" image="square.and.arrow.up" catalog="system"/>
+                                                </button>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="clip" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="USk-v2-6Sm">
+                                                    <rect key="frame" x="115" y="122.5" width="11" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="TopLeft" horizontalHuggingPriority="251" verticalCompressionResistancePriority="749" text="Amazon's share of the US e-commerce market is now 49%, or 5% of all retail spend" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="none" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="22q-8U-TzS">
+                                                    <rect key="frame" x="15" y="20" width="234" height="55"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="55" id="KKu-ih-PM4"/>
+                                                        <constraint firstAttribute="width" constant="234" id="ce6-SM-5pd"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="16"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                    <size key="shadowOffset" width="0.0" height="0.0"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottomMargin" secondItem="USk-v2-6Sm" secondAttribute="bottom" constant="7.5" id="3CD-nW-jaB"/>
+                                                <constraint firstItem="USk-v2-6Sm" firstAttribute="leading" secondItem="OdR-a9-OKf" secondAttribute="trailing" constant="81" id="73g-4h-6Fx"/>
+                                                <constraint firstItem="USk-v2-6Sm" firstAttribute="firstBaseline" secondItem="OdR-a9-OKf" secondAttribute="firstBaseline" id="7tv-d5-mW1"/>
+                                                <constraint firstItem="22q-8U-TzS" firstAttribute="leading" secondItem="XJU-37-DEQ" secondAttribute="leading" constant="15" id="BeW-OF-QZl"/>
+                                                <constraint firstAttribute="bottom" secondItem="OdR-a9-OKf" secondAttribute="bottom" constant="19" id="CjS-4g-4oA"/>
+                                                <constraint firstItem="J8R-Kd-Nyh" firstAttribute="top" secondItem="XJU-37-DEQ" secondAttribute="topMargin" id="Hho-Wh-t58"/>
+                                                <constraint firstItem="USk-v2-6Sm" firstAttribute="firstBaseline" secondItem="OdR-a9-OKf" secondAttribute="baseline" id="SqL-gF-jUV"/>
+                                                <constraint firstItem="J8R-Kd-Nyh" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="USk-v2-6Sm" secondAttribute="trailing" constant="8" symbolic="YES" id="TRO-Be-No9"/>
+                                                <constraint firstItem="USk-v2-6Sm" firstAttribute="top" secondItem="22q-8U-TzS" secondAttribute="bottom" constant="47.5" id="UfF-q0-MfW"/>
+                                                <constraint firstItem="OdR-a9-OKf" firstAttribute="leading" secondItem="XJU-37-DEQ" secondAttribute="leading" constant="15" id="YUo-6t-6cq"/>
+                                                <constraint firstItem="57L-Td-h1u" firstAttribute="top" secondItem="XJU-37-DEQ" secondAttribute="top" constant="5" id="baJ-Fg-TC2"/>
+                                                <constraint firstItem="57L-Td-h1u" firstAttribute="leading" secondItem="XJU-37-DEQ" secondAttribute="leading" constant="15" id="dWQ-92-W0S"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="J8R-Kd-Nyh" secondAttribute="trailing" constant="0.5" id="i39-Wz-Yhq"/>
+                                                <constraint firstItem="J8R-Kd-Nyh" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="57L-Td-h1u" secondAttribute="trailing" constant="8" symbolic="YES" id="mya-sX-Gp2"/>
+                                                <constraint firstItem="22q-8U-TzS" firstAttribute="top" secondItem="XJU-37-DEQ" secondAttribute="top" constant="20" symbolic="YES" id="te8-WJ-MXc"/>
+                                            </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="authorName" destination="57L-Td-h1u" id="06c-mm-9NE"/>
+                                            <outlet property="headLine" destination="22q-8U-TzS" id="ghC-RF-bXe"/>
+                                            <outlet property="newsImage" destination="J8R-Kd-Nyh" id="nxV-8q-15m"/>
+                                            <outlet property="timePublication" destination="USk-v2-6Sm" id="CRN-4p-U2e"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
@@ -42,10 +101,13 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Saved" id="bJv-r2-7Zv"/>
+                    <connections>
+                        <outlet property="tableView" destination="fcr-wA-D63" id="dTa-dY-mEm"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bkY-SE-Hvj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1911" y="482"/>
+            <point key="canvasLocation" x="1757.9710144927537" y="480.80357142857139"/>
         </scene>
         <!--Covid News-->
         <scene sceneID="6jm-B6-Ho2">
@@ -153,7 +215,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Qz-wS-28V" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1910.144927536232" y="-498.88392857142856"/>
+            <point key="canvasLocation" x="1759" y="-494"/>
         </scene>
         <!--Article View Controller-->
         <scene sceneID="CjJ-Co-EZL">

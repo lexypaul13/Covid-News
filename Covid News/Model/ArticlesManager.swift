@@ -27,7 +27,6 @@ class ArticleManger {
       }
       if let data = data {
         self.articles = self.parseData(data: data)
-        CoreDataManger.sharedInstance.createData()
         
       }
       
