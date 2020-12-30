@@ -16,7 +16,6 @@ class LatestNewsViewController: UIViewController {
     // Website API
     var urlSelected = ""
     var news = ArticleManger()
-    
     var filteredArticles: [ArticlesData]! = [] //holds searched articles
     let searchController = UISearchController(searchResultsController: nil)//sets current view to display search results
     
@@ -56,8 +55,7 @@ class LatestNewsViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(refreshTableView), name: Notification.Name("didFinishParsing"), object: nil)
         tableView.dataSource = self
         tableView.delegate = self
-        CoreDataManger.sharedInstance.loadArticles()
-
+ 
         navigationController?.navigationBar.prefersLargeTitles = true
         searchController.searchResultsUpdater = self //informs class of  any text changes within the searchBar.
         searchController.obscuresBackgroundDuringPresentation = false
@@ -99,31 +97,21 @@ extension LatestNewsViewController: UITableViewDataSource, UITableViewDelegate, 
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell1", for: indexPath) as! NewsTableViewCell
         let stories = news.articles
         var news: ArticlesData
-        
+       
         if isFiltering {
             news = filteredArticles![indexPath.row]
         } else {
             news = stories![indexPath.row]
         }
-        
         cell.authorName.text = news.author
         cell.headLine.text = news.myDescription
-        cell.newsImage.downloadImage(from: (news.urlImage ?? "nill"))
-        if let dateString = news.publishedAt,
-           let date = indDateFormatter.date(from: dateString) {
-            let formattedString = outDateFormtter.string(from: date)
-            cell.timePublication.text = formattedString
-        } else {
-            cell.timePublication.text = "----------"
-        }
-        
+        cell.newsImage.downloadImage(from: news.urlImage ?? " ")
+        cell.timePublication.text = news.publishedAt?.convertToDisplayFormat()
+    
         return cell
     }
     
-    // shows website that correpsonds to selected table cell
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "articles", sender: self)
-    }
+    
     
     // perform transition to safari webview
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -147,6 +135,9 @@ extension LatestNewsViewController: UITableViewDataSource, UITableViewDelegate, 
             completionHandler(true)
             guard let article = self.news.articles?[indexPath.row] else { return }
             CoreDataManger.sharedInstance.saveArticle(article: article)
+            let alert = UIAlertController(title: "Saved", message: nil,preferredStyle: UIAlertController.Style.alert)
+            alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
         }
         save.backgroundColor = .systemBlue
         
@@ -168,23 +159,5 @@ extension LatestNewsViewController: UITableViewDataSource, UITableViewDelegate, 
     }
     
 }
+    
 
-extension UIImageView {
-    
-    /// downloads images asynchronous
-    func downloadImage(from url: String) {
-        let urlRequest = URLRequest(url: URL(string: url)!)
-        let task = URLSession.shared.dataTask(with: urlRequest) { (data, _, error) in
-            if error != nil {
-                print(error ?? 0)
-                return
-            }
-            
-            DispatchQueue.main.async {
-                self.image = UIImage(data: data!)
-            }
-        }
-        task.resume()
-    }
-    
-}

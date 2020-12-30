@@ -49,6 +49,7 @@ class CoreDataManger: NSObject {
     func loadArticles()-> NSFetchRequest<NSFetchRequestResult>{
          let fetchRequest =  NSFetchRequest<NSFetchRequestResult>(entityName: "News")
          fetchRequest.fetchLimit = newsCoreData.count
+        
          let sortDescriptor = NSSortDescriptor(key: "publishedAt", ascending: true)
          fetchRequest.sortDescriptors = [sortDescriptor]
 
