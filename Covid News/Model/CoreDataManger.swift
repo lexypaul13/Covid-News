@@ -57,16 +57,6 @@ class CoreDataManger: NSObject {
     }
 
     
-   /** func loadArticles()->NSFetchedResultsController<NSFetchRequestResult>{
-        let fetchRequest = NSFetchRequest<News>(entityName: "News")
-        do{
-            let fetchedResults = try context.fetch(fetchRequest)
-         }catch let error as NSError {
-            // something went wrong, print the error.
-            print(error.description)
-        }
-        
-    } **/
     
     
   /// Prints the Core Data path and can be viewed in Finder

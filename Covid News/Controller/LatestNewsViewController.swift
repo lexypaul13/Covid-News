@@ -25,15 +25,7 @@ class LatestNewsViewController: UIViewController {
     var isFiltering: Bool {
         return searchController.isActive && !isSearchBarEmpty
     }
-    
-    let indDateFormatter =  ISO8601DateFormatter()
-    let outDateFormtter: DateFormatter = {
-        let df = DateFormatter()
-        df.dateFormat = "dd-MM-yyyy"
-        df.locale = Locale(identifier: "en_US_POSIX")
-        return df
-    }()
-    
+     
     // MARK: - Selectors
     
     @objc func refreshTableView() {
@@ -92,6 +84,7 @@ extension LatestNewsViewController: UITableViewDataSource, UITableViewDelegate, 
     }
     
     // displays contents of  json file on table cells  and filters for search results
+  
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell1", for: indexPath) as! NewsTableViewCell
@@ -113,6 +106,7 @@ extension LatestNewsViewController: UITableViewDataSource, UITableViewDelegate, 
     
     
     
+    
     // perform transition to safari webview
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let stories = news.articles
@@ -127,6 +121,7 @@ extension LatestNewsViewController: UITableViewDataSource, UITableViewDelegate, 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 163
     }
+    
     
     /// Save article by swiping left
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {

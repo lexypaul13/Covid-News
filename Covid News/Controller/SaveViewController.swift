@@ -11,7 +11,11 @@ import CoreData
 class SaveViewController: UIViewController {
     
     var context = CoreDataManger.sharedInstance.context
+    
+    var newsData = CoreDataManger.sharedInstance.newsCoreData
+    
     var fetchRequest = CoreDataManger.sharedInstance.loadArticles()
+    
     var fetchedResultController:NSFetchedResultsController = NSFetchedResultsController<NSFetchRequestResult>()
     
     @IBOutlet weak var tableView: UITableView!
@@ -44,15 +48,26 @@ extension SaveViewController: UITableViewDataSource, UITableViewDelegate,NSFetch
         return fetchedResultController
     }
     func numberOfSections(in tableView: UITableView) -> Int {
-        
         let numberOfSections = fetchedResultController.sections?.count ?? 0
         
         return numberOfSections
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let cell = sender as! UITableViewCell
+        let indexPath = tableView.indexPath(for: cell)
+        let task: News = fetchedResultController.object(at: indexPath ?? []) as! News
+       
+        if segue.identifier == "articles2"{
+            let destinationController = segue.destination as! SavedViewController
+            destinationController.website = task
+        }
         
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let sectionNumbers = fetchedResultController.sections?[section].numberOfObjects ?? 0
+        
         return sectionNumbers
         
     }
@@ -61,7 +76,6 @@ extension SaveViewController: UITableViewDataSource, UITableViewDelegate,NSFetch
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell2", for: indexPath) as! SaveTableViewCell
         let news = fetchedResultController.object(at: indexPath as IndexPath) as! News
         
@@ -69,13 +83,12 @@ extension SaveViewController: UITableViewDataSource, UITableViewDelegate,NSFetch
         cell.headLine.text = news.myDescription
         cell.timePublication.text = news.publishedAt?.convertToDisplayFormat()
         cell.newsImage.downloadImage(from: news.urlImage ?? "")
-      
+        
         return cell
     }
     
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        
         if editingStyle == UITableViewCell.EditingStyle.delete{
             let managedObjectContext = CoreDataManger.sharedInstance.context
             let managedObject :NSManagedObject = fetchedResultController.object(at: indexPath) as! NSManagedObject
@@ -88,7 +101,7 @@ extension SaveViewController: UITableViewDataSource, UITableViewDelegate,NSFetch
         }
     }
     
-
+    
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         tableView.reloadData()
     }
