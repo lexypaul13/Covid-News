@@ -11,7 +11,7 @@ import WebKit
 class ArticleViewController: UIViewController {
   
   @IBOutlet weak var articlePage: WKWebView!
-  var website: ArticlesData?
+  weak var website: ArticlesData?
   
   override func viewDidLoad() {
     super.viewDidLoad()

@@ -40,7 +40,7 @@ class ArticleManger{
         do {
             let jsonResult = try JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.mutableContainers) as? NSDictionary
             
-            var jsonArticles = jsonResult?["articles"] as? [AnyObject] ?? [] // gets first head of json file and converts it to dictionary
+            let jsonArticles = jsonResult?["articles"] as? [AnyObject] ?? [] // gets first head of json file and converts it to dictionary
             
             for jsonArticle in jsonArticles { // captures data and stores it in the model object
                 let article = ArticlesData()

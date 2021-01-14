@@ -9,6 +9,12 @@
 import Foundation
 
 extension String{
+    func trunc(length: Int, trailing: String = "…") -> String {
+        return (self.count > length) ? self.prefix(length) + trailing : self
+      }
+    
+    
+    
 func convertToDate() -> Date?{
     let dateFormatter = DateFormatter()
     dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
@@ -20,9 +26,9 @@ func convertToDate() -> Date?{
         guard let date = self.convertToDate()  else { return "N/A"}
         return date.convertToMonthYearFormat()
         }
-    }
+
     
-    
+}
     
     
 

@@ -11,6 +11,7 @@ import UIKit
 class NewsTableViewCell: UITableViewCell {
   
   @IBOutlet weak var authorName: UILabel!
+  
   @IBOutlet weak var headLine: UILabel!
   @IBOutlet weak var timePublication: UILabel!
   @IBOutlet weak var newsImage: UIImageView!

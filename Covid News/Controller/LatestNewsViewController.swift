@@ -96,8 +96,9 @@ extension LatestNewsViewController: UITableViewDataSource, UITableViewDelegate, 
         } else {
             news = stories![indexPath.row]
         }
-        cell.authorName.text = news.author
-        cell.headLine.text = news.myDescription
+        cell.authorName.text = news.author?.trunc(length: 21)
+        
+        cell.headLine.text = news.myDescription?.trunc(length: 100)
         cell.newsImage.downloadImage(from: news.urlImage ?? " ")
         cell.timePublication.text = news.publishedAt?.convertToDisplayFormat()
     
