@@ -11,17 +11,21 @@ import WebKit
 
 class SavedViewController: UIViewController {
     @IBOutlet weak var savedArticle: WKWebView!
-    
     weak var website: News?
     
     override func viewDidLoad() {
       super.viewDidLoad()
-      
-      if let url = URL(string: website?.urlWebsite ?? "" ) {
+        loadWebsite()
+      }
+
+  func loadWebsite(){
+       if let url = URL(string: website?.urlWebsite ?? "" ) {
         let request = URLRequest(url: url)
         savedArticle.load(request)
-        // Do any additional setup after loading the view.
+        }
       }
-    }
     
-  }
+
+}
+    
+

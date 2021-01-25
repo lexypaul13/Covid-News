@@ -16,3 +16,27 @@ class ArticlesData: NSObject {
   var urlImage: String?
   var urlWebsite: String?
 }
+
+
+extension ArticlesData{
+    var unwrappedAuthor: String{
+        "\(author ?? "Unavailable")"
+    }
+    
+    var unwrappedTitle:String {
+        "\(title ?? "Unavilable")"
+    }
+    
+    var unwrappedmyDescription:String {
+        "\(myDescription ?? "Unavilable")"
+    }
+    
+    var unwrappedPublishedAt:String {
+        "\(publishedAt ?? "Unavilable")"
+    }
+    
+    var unwrappedUrlWebsite:String {
+        "\(urlWebsite ?? "Unavailable")"
+    }
+    
+}

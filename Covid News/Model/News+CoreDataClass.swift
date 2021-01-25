@@ -9,6 +9,4 @@
 import Foundation
 import CoreData
 
-public class News: NSManagedObject {
-  
-}
+public class News: NSManagedObject {}

@@ -8,19 +8,19 @@
 
 import UIKit
 import WebKit
+
 class ArticleViewController: UIViewController {
-  
-  @IBOutlet weak var articlePage: WKWebView!
-  weak var website: ArticlesData?
-  
-  override func viewDidLoad() {
-    super.viewDidLoad()
     
-    if let url = URL(string: website?.urlWebsite ?? "" ) {
-      let request = URLRequest(url: url)
-      articlePage.load(request)
-      // Do any additional setup after loading the view.
+    @IBOutlet weak var articlePage: WKWebView!
+    weak var website: ArticlesData?
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        if let url = URL(string: website?.unwrappedUrlWebsite ?? "" ) {
+            let request = URLRequest(url: url)
+            articlePage.load(request)
+            // Do any additional setup after loading the view.
+        }
     }
-  }
-  
+    
 }
