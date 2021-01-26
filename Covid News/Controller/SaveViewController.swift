@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+
 class SaveViewController: UIViewController {
     
     var context = CoreDataManger.sharedInstance.context
@@ -76,7 +77,7 @@ extension SaveViewController: UITableViewDataSource, UITableViewDelegate,NSFetch
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell2", for: indexPath) as! SaveTableViewCell
         let news = fetchedResultController.object(at: indexPath as IndexPath) as! News
         cell.authorName.text = news.unwrappedAuthor.trunc(length: 21)
-        cell.headLine.text = news.unwrappedmyDescription.trunc(length: 95)
+        cell.headLine.text = news.unwrappedmyDescription.trunc(length: 82)
         cell.timePublication.text = news.unwrappedPublishedAt.convertToDisplayFormat()
         cell.newsImage.downloadImage(from: news.urlImage ?? "")
         return cell

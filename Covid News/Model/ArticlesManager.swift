@@ -11,14 +11,18 @@ import CoreData
 
 class ArticleManger{
     
-    var website = "http://newsapi.org/v2/everything?q=coronavirus&sortBy=popularity&apiKey=d32071cd286c4f6b9c689527fc195b03&pageSize=50&page=2"
+    //var website = "http://newsapi.org/v2/everything?q=coronavirus&sortBy=popularity&apiKey=d32071cd286c4f6b9c689527fc195b03&pageSize=20&page=1"
     var articles: [ArticlesData]? = [] // holds array of model object
     let cache   = NSCache<NSString, UIImage>()
     var date: String?
+    var baseUrl = "http://newsapi.org/v2/everything?q=coronavirus&sortBy=popularity"
+    var apiKey = "&apiKey=d32071cd286c4f6b9c689527fc195b03&"
+    var pageNumber = "pageSize=50&page=2"
     
     //send a request to the server
-    func performRequest() {
-        guard let aritcleUrl = URL(string: website) else {return}
+    func performRequest(page:Int) {
+        let endPoint = baseUrl + "&apiKey=d32071cd286c4f6b9c689527fc195b03&" + "pageSize=20&page=\(page)"
+        guard let aritcleUrl = URL(string: endPoint) else {return}
         let request = URLRequest(url: aritcleUrl)
         let task = URLSession.shared.dataTask(with: request, completionHandler: { [weak self] (data, response, error) -> Void in //collects content from website
             guard let self = self else { return }

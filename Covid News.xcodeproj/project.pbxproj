@@ -29,6 +29,7 @@
 		57D4B9FC24EF6D98003002DC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 57D4B9FA24EF6D98003002DC /* LaunchScreen.storyboard */; };
 		57D4BA0724EF6D99003002DC /* Covid_NewsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57D4BA0624EF6D99003002DC /* Covid_NewsTests.swift */; };
 		57D4BA1224EF6D99003002DC /* Covid_NewsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57D4BA1124EF6D99003002DC /* Covid_NewsUITests.swift */; };
+		57D6F30A25BFD5C000B3924C /* ArticleError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57D6F30925BFD5C000B3924C /* ArticleError.swift */; };
 		57F2D28E24F0CD270075CB62 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 57F2D28D24F0CD270075CB62 /* Assets.xcassets */; };
 		57FEDC352599D46F0029A350 /* ImageDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57FEDC342599D46F0029A350 /* ImageDownloader.swift */; };
 		783D3355D122D870B298D115 /* Pods_Covid_NewsTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E18BA3B48003046C65B44468 /* Pods_Covid_NewsTests.framework */; };
@@ -82,6 +83,7 @@
 		57D4BA0D24EF6D99003002DC /* Covid NewsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Covid NewsUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		57D4BA1124EF6D99003002DC /* Covid_NewsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Covid_NewsUITests.swift; sourceTree = "<group>"; };
 		57D4BA1324EF6D99003002DC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		57D6F30925BFD5C000B3924C /* ArticleError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleError.swift; sourceTree = "<group>"; };
 		57F2D28D24F0CD270075CB62 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		57FEDC342599D46F0029A350 /* ImageDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDownloader.swift; sourceTree = "<group>"; };
 		67159BC49CE2E9C79E472206 /* Pods_Covid_News.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Covid_News.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -126,6 +128,7 @@
 			isa = PBXGroup;
 			children = (
 				579DFAD22568EDCD0065E2F4 /* NewsDataModel.xcdatamodeld */,
+				57D6F30925BFD5C000B3924C /* ArticleError.swift */,
 				57197AA42550453100563444 /* ArticlesManager.swift */,
 				578B7261259C4B0500B7BB03 /* Date+Ext.swift */,
 				578B726A259C4BFA00B7BB03 /* String+Ext.swift */,
@@ -491,6 +494,7 @@
 				5721287524F36EFA00C0FE61 /* NewsTableViewCell.swift in Sources */,
 				57D4B9F024EF6D97003002DC /* AppDelegate.swift in Sources */,
 				57D4B9F224EF6D97003002DC /* SceneDelegate.swift in Sources */,
+				57D6F30A25BFD5C000B3924C /* ArticleError.swift in Sources */,
 				5743B4BD259DB2AC009FA6DD /* SavedViewController.swift in Sources */,
 				57B743D3257C9642000E8A2B /* SaveTableViewCell.swift in Sources */,
 				578B726B259C4BFA00B7BB03 /* String+Ext.swift in Sources */,

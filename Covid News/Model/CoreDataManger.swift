@@ -10,20 +10,15 @@ import UIKit
 import CoreData
 
 class CoreDataManger: NSObject {
-    
-    // MARK: - Properties
+
     static let sharedInstance = CoreDataManger()
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var newsCoreData: [News] = []
     var article = ArticlesData()
     
-    // MARK: - Lifecycle
     private override init() {}
-    // MARK: - Core Data Saving support
-    
-    /// Saves an ArticlesData object as a News object
-    func saveArticle(article: ArticlesData) {
-        // Create an new 'News' object
+ 
+     func saveArticle(article: ArticlesData) {
         let news = News(context: context)
         news.setValue("\(article.author ?? "")", forKeyPath: "author")
         news.setValue("\(article.myDescription ?? "")", forKeyPath: "myDescription")
