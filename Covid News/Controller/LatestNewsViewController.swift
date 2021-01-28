@@ -26,8 +26,9 @@ class LatestNewsViewController: UIViewController {
         super.viewDidLoad()
         configureSearch()
         configureTableView()
-        NotificationCenter.default.addObserver(self, selector: #selector(refreshTableView), name: Notification.Name("didFinishParsing"), object: nil)
+     NotificationCenter.default.addObserver(self, selector: #selector(refreshTableView), name: Notification.Name("didFinishParsing"), object: nil)
     }
+    
     @objc func refreshTableView() {
         DispatchQueue.main.async {
             self.tableView.reloadData()
@@ -76,13 +77,14 @@ extension LatestNewsViewController: UITableViewDataSource, UITableViewDelegate {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell1", for: indexPath) as! NewsTableViewCell
         let stories = news.articles
         var news: ArticlesData
+       
         if isFiltering {
             news = filteredArticles![indexPath.row]
         } else {
             news = stories![indexPath.row]
         }
-        cell.authorName.text = news.unwrappedAuthor.trunc(length: 21)
-        cell.headLine.text = news.unwrappedmyDescription.trunc(length: 82)
+        cell.authorName.text = news.unwrappedAuthor.trunc(length: 15)
+        cell.headLine.text = news.unwrappedmyDescription.trunc(length: 100)
         cell.newsImage.downloadImage(from: news.urlImage ?? " ")
         cell.timePublication.text = news.unwrappedPublishedAt.convertToDisplayFormat()
         return cell
@@ -119,9 +121,7 @@ extension LatestNewsViewController: UITableViewDataSource, UITableViewDelegate {
             completionHandler(true)
             guard let article = self.news.articles?[indexPath.row] else { return }
             CoreDataManger.sharedInstance.saveArticle(article: article)
-            let alert = UIAlertController(title: "Saved", message: nil,preferredStyle: UIAlertController.Style.alert)
-            alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
-            self.present(alert, animated: true, completion: nil)
+            self.alert(message:"" , title: "Saved")
         }
         save.backgroundColor = .systemBlue
         let swipe =  UISwipeActionsConfiguration(actions: [save])

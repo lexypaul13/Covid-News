@@ -16,8 +16,6 @@ class ArticleManger{
     let cache   = NSCache<NSString, UIImage>()
     var date: String?
     var baseUrl = "http://newsapi.org/v2/everything?q=coronavirus&sortBy=popularity"
-    var apiKey = "&apiKey=d32071cd286c4f6b9c689527fc195b03&"
-    var pageNumber = "pageSize=50&page=2"
     
     //send a request to the server
     func performRequest(page:Int) {
@@ -30,7 +28,7 @@ class ArticleManger{
                 print(error ?? 0)
                 return
             }
-            if let data = data { self.articles = self.parseData(data: data) }})
+            if let data = data {self.articles = self.parseData(data: data)}})
         task.resume()
     }
     
@@ -57,4 +55,5 @@ class ArticleManger{
         }
         return articles ?? []
     }
+    
 }

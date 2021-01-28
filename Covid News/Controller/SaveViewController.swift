@@ -48,6 +48,7 @@ extension SaveViewController: UITableViewDataSource, UITableViewDelegate,NSFetch
         fetchedResultController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
         return fetchedResultController
     }
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         let numberOfSections = fetchedResultController.sections?.count ?? 0
         return numberOfSections
@@ -99,9 +100,5 @@ extension SaveViewController: UITableViewDataSource, UITableViewDelegate,NSFetch
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         tableView.reloadData()
     }
-    
-    
-    
-    
     
 }
