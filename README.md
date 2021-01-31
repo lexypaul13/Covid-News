@@ -7,4 +7,5 @@ Covid News is a mobile application written in swift that collects news from the 
 
 
 
-![Covid News](https://user-images.githubusercontent.com/55071531/106400552-0eb3de80-63ed-11eb-939d-4e33c45b6c9a.gif)
+![Covid News](https://user-images.githubusercontent.com/55071531/106400671-d660d000-63ed-11eb-9fa0-12cfb7f54762.gif)
+
