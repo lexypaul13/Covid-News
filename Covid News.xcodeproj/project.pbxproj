@@ -673,8 +673,9 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = DEADFBDE2EEA6591F203BE2E /* Pods-Covid News.debug.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-1";
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = XP8B6WBPCD;
 				INFOPLIST_FILE = "Covid News/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -683,7 +684,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "N-A.Covid-News";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -691,8 +692,9 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = B60D52BA946F6C692C7F88DE /* Pods-Covid News.release.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-1";
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = XP8B6WBPCD;
 				INFOPLIST_FILE = "Covid News/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -701,7 +703,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "N-A.Covid-News";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

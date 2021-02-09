@@ -14,6 +14,7 @@ class SaveViewController: UIViewController {
     var context = CoreDataManger.sharedInstance.context
     var newsData = CoreDataManger.sharedInstance.newsCoreData
     var fetchRequest = CoreDataManger.sharedInstance.loadArticles()
+    
     var fetchedResultController:NSFetchedResultsController = NSFetchedResultsController<NSFetchRequestResult>()
     @IBOutlet weak var tableView: UITableView!
     

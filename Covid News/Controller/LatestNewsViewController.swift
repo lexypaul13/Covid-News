@@ -13,9 +13,9 @@ class LatestNewsViewController: UIViewController {
     
     var urlSelected = ""
     var news = ArticleManger()
-    var filteredArticles: [ArticlesData]! = [] //holds searched articles
+    var filteredArticles: [ArticlesData]! = []
     var page = 1
-    let searchController = UISearchController(searchResultsController: nil)//sets current view to display search results
+    let searchController = UISearchController(searchResultsController: nil)
     var isSearchBarEmpty: Bool {return searchController.searchBar.text?.isEmpty ?? true}
     var isFiltering: Bool {return searchController.isActive && !isSearchBarEmpty}
    
@@ -26,6 +26,7 @@ class LatestNewsViewController: UIViewController {
         super.viewDidLoad()
         configureSearch()
         configureTableView()
+        news.performRequest(page: page)
      NotificationCenter.default.addObserver(self, selector: #selector(refreshTableView), name: Notification.Name("didFinishParsing"), object: nil)
     }
     
@@ -43,11 +44,11 @@ class LatestNewsViewController: UIViewController {
     
     func configureSearch(){
         navigationController?.navigationBar.prefersLargeTitles = true
-        searchController.searchResultsUpdater = self //informs class of  any text changes within the searchBar.
+        searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
-        searchController.searchBar.placeholder = "Search News" //sets place holder name
-        navigationItem.searchController = searchController //adds sreach bar to navigation item
-        definesPresentationContext = true //ensures that search bar doesnt remain on screen when user moves to another screemn
+        searchController.searchBar.placeholder = "Search News"
+        navigationItem.searchController = searchController
+        definesPresentationContext = true
     }
 
     @IBAction func shareButton(_ sender: UIButton) {
@@ -63,7 +64,7 @@ class LatestNewsViewController: UIViewController {
 }
 
 extension LatestNewsViewController: UITableViewDataSource, UITableViewDelegate {
-    // determines what type of data
+ 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if isFiltering {
             return filteredArticles?.count ?? 0
@@ -71,8 +72,11 @@ extension LatestNewsViewController: UITableViewDataSource, UITableViewDelegate {
         return news.articles?.count ?? 0
     }
     
-    // displays contents of  json file on table cells  and filters for search results
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+    }
+ 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell1", for: indexPath) as! NewsTableViewCell
         let stories = news.articles
@@ -90,8 +94,7 @@ extension LatestNewsViewController: UITableViewDataSource, UITableViewDelegate {
         return cell
     }
     
-    // perform transition to safari webview
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let stories = news.articles
         if segue.identifier == "articles"{
             let destinationController = segue.destination as! ArticleViewController
@@ -99,8 +102,7 @@ extension LatestNewsViewController: UITableViewDataSource, UITableViewDelegate {
         }
     }
     
-    // increses table row height
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 163
     }
     
@@ -109,13 +111,13 @@ extension LatestNewsViewController: UITableViewDataSource, UITableViewDelegate {
         let contentHeight   = scrollView.contentSize.height
         let height          = scrollView.frame.size.height
         if offsetY > contentHeight - height {
-            news.performRequest(page: page)
+            
             page+=1
+            news.performRequest(page: page)
         }
     }
     
-    /// Save article by swiping left
-    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
         let save = UIContextualAction(style: .normal, title: "Save") { (_, _, completionHandler) in
             completionHandler(true)
@@ -130,13 +132,12 @@ extension LatestNewsViewController: UITableViewDataSource, UITableViewDelegate {
 }
 
 extension LatestNewsViewController: UISearchResultsUpdating{
-    func updateSearchResults(for searchController: UISearchController) { // updates search result from text typed from the user
+    func updateSearchResults(for searchController: UISearchController) {
         let searchBar = searchController.searchBar
         filterContentForSearchText(searchBar.text!, news.articles!)
     }
     
-    // filters through articles to find matching results and reloadsa table view
-    func filterContentForSearchText(_ searchText: String, _ category: [ArticlesData]) {
+     func filterContentForSearchText(_ searchText: String, _ category: [ArticlesData]) {
         filteredArticles =  news.articles?.filter({ (article: ArticlesData) -> Bool in
         return (article.myDescription?.lowercased().contains(searchText.lowercased()) ?? false) })
         tableView.reloadData()
