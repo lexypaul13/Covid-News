@@ -11,7 +11,7 @@ import WebKit
 
 class SavedViewController: UIViewController {
     @IBOutlet weak var savedArticle: WKWebView!
-    weak var website: News?
+     var website: News?
     
     override func viewDidLoad() {
       super.viewDidLoad()

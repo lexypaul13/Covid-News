@@ -16,7 +16,7 @@ class CoreDataManger: NSObject {
     var newsCoreData: [News] = []
     var article = ArticlesData()
     
-    private override init() {}
+    
  
      func saveArticle(article: ArticlesData) {
         let news = News(context: context)
@@ -26,8 +26,7 @@ class CoreDataManger: NSObject {
         news.setValue("\(article.title ?? "")", forKeyPath: "title")
         news.setValue("\(article.urlImage ?? "")", forKeyPath: "urlImage")
         news.setValue("\(article.urlWebsite ?? "")", forKeyPath: "urlWebsite")
-        // Save to CoreData
-        do {
+         do {
             try context.save()
         } catch let error {
             print("Failed to create Person: \(error.localizedDescription)")
@@ -42,8 +41,7 @@ class CoreDataManger: NSObject {
         return fetchRequest
     }
     
-    /// Prints the Core Data path and can be viewed in Finder
-    func printCoreDataDBPath() {
+     func printCoreDataDBPath() {
         let path = FileManager
             .default
             .urls(for: .applicationSupportDirectory, in: .userDomainMask)

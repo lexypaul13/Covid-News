@@ -7,23 +7,24 @@
 //
 
 import UIKit
-import CoreData
 
 class ArticleManger{
     
-     var articles: [ArticlesData]? = []
-    let cache   = NSCache<NSString, UIImage>()
-    var date: String?
-    var baseUrl = "http://newsapi.org/v2/everything?q=trump&sortBy=popularity"
+    var articles: [ArticlesData]? = []
+    var baseUrl = "http://newsapi.org/v2/everything?q=covid&sortBy=popularity"
+    var apiKey =  "&apiKey=d32071cd286c4f6b9c689527fc195b03&"
     
-     func performRequest(page:Int) {
-        let endPoint = baseUrl + "&apiKey=d32071cd286c4f6b9c689527fc195b03&" + "pageSize=20&page=\(page)"
-        guard let aritcleUrl = URL(string: endPoint) else {return}
+    func performRequest(page:Int) {
+        let endPoint = baseUrl + apiKey + "pageSize=20&page=\(page)"
+        guard let aritcleUrl = URL(string: endPoint) else {
+            print("Invalid Url")
+            return
+        }
         let request = URLRequest(url: aritcleUrl)
         let task = URLSession.shared.dataTask(with: request, completionHandler: { [weak self] (data, response, error) -> Void in
             guard let self = self else { return }
             if  error != nil {
-                print(error ?? 0)
+                print(error?.localizedDescription ?? "")
                 return
             }
             if let data = data {self.articles = self.parseData(data: data)}})
@@ -47,6 +48,7 @@ class ArticleManger{
                 articles?.append(article)
             }
             articles?.sort(by:{ $0.publishedAt! > $1.publishedAt! })
+            
             let nc = NotificationCenter.default
             nc.post(name: Notification.Name("didFinishParsing"), object: nil)
         } catch {

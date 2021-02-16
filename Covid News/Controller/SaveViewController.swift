@@ -11,35 +11,37 @@ import CoreData
 
 class SaveViewController: UIViewController {
     
-    var context = CoreDataManger.sharedInstance.context
-    var newsData = CoreDataManger.sharedInstance.newsCoreData
-    var fetchRequest = CoreDataManger.sharedInstance.loadArticles()
+    let context = CoreDataManger.sharedInstance.context
+    let newsData = CoreDataManger.sharedInstance.newsCoreData
+    let fetchRequest = CoreDataManger.sharedInstance.loadArticles()
+
+    var fetchedResultController = NSFetchedResultsController<NSFetchRequestResult>()
     
-    var fetchedResultController:NSFetchedResultsController = NSFetchedResultsController<NSFetchRequestResult>()
     @IBOutlet weak var tableView: UITableView!
     
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        configureFetchResults()
+        getFetchResults()
         configureTableView()
+    }
+    
+    func getFetchResults(){
+        fetchedResultController = getResultFetchedResultController()
+        fetchedResultController.delegate = self
+        do{
+            try fetchedResultController.performFetch()
+        }catch {
+            print(error.localizedDescription)
+        }
     }
     
     func configureTableView(){
         tableView.dataSource = self
         tableView.delegate = self
-        
     }
     
-    func configureFetchResults(){
-        fetchedResultController = getResultFetchedResultController()
-        fetchedResultController.delegate = self
-        do{
-            try fetchedResultController.performFetch()
-        }catch _ {
-            
-        }
-    }
+   
     
 }
 
@@ -55,10 +57,10 @@ extension SaveViewController: UITableViewDataSource, UITableViewDelegate,NSFetch
         return numberOfSections
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let cell = sender as! UITableViewCell
-        let indexPath = tableView.indexPath(for: cell)
+     func prepare(for segue: UIStoryboardSegue, sender:UITableViewCell) {
+        let indexPath = tableView.indexPath(for: sender)
         let task: News = fetchedResultController.object(at: indexPath ?? []) as! News
+        
         if segue.identifier == "articles2"{
             let destinationController = segue.destination as! SavedViewController
             destinationController.website = task
@@ -87,13 +89,14 @@ extension SaveViewController: UITableViewDataSource, UITableViewDelegate,NSFetch
     
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        
         if editingStyle == UITableViewCell.EditingStyle.delete{
-            let managedObjectContext = CoreDataManger.sharedInstance.context
-            let managedObject :NSManagedObject = fetchedResultController.object(at: indexPath) as! NSManagedObject
-            managedObjectContext.delete(managedObject)
+            let managedObject = fetchedResultController.object(at: indexPath) as! NSManagedObject
+            context.delete(managedObject)
             do{
-                try managedObjectContext.save()
+                try context.save()
             }catch _ {
+                
             }
         }
     }

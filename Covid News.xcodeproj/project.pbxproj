@@ -128,15 +128,15 @@
 			isa = PBXGroup;
 			children = (
 				579DFAD22568EDCD0065E2F4 /* NewsDataModel.xcdatamodeld */,
+				57197AAC2550454D00563444 /* ArticlesData.swift */,
 				57197AA42550453100563444 /* ArticlesManager.swift */,
 				57FEDC342599D46F0029A350 /* ImageDownloader.swift */,
+				578B726A259C4BFA00B7BB03 /* String+Ext.swift */,
 				578B7261259C4B0500B7BB03 /* Date+Ext.swift */,
 				5740231225C14B7000B224FC /* UI+Extension.swift */,
-				578B726A259C4BFA00B7BB03 /* String+Ext.swift */,
 				576B328B2570CBCE00C7DA66 /* CoreDataManger.swift */,
 				57108917256B85770086B9B2 /* News+CoreDataClass.swift */,
 				57108918256B85770086B9B2 /* News+CoreDataProperties.swift */,
-				57197AAC2550454D00563444 /* ArticlesData.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -147,9 +147,9 @@
 				5713E05D24F1D0B600A1CEB7 /* LatestNewsViewController.swift */,
 				5721287424F36EFA00C0FE61 /* NewsTableViewCell.swift */,
 				5728F2E124FA1BA80082E683 /* ArticleViewController.swift */,
-				5743B4BC259DB2AC009FA6DD /* SavedViewController.swift */,
 				57994467257C93EF00E93891 /* SaveViewController.swift */,
 				57B743D2257C9642000E8A2B /* SaveTableViewCell.swift */,
+				5743B4BC259DB2AC009FA6DD /* SavedViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";

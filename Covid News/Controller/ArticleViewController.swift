@@ -19,8 +19,7 @@ class ArticleViewController: UIViewController {
         if let url = URL(string: website?.unwrappedUrlWebsite ?? "" ) {
             let request = URLRequest(url: url)
             articlePage.load(request)
-            // Do any additional setup after loading the view.
-        }
+         }
     }
     
 }

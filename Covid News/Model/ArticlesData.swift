@@ -8,7 +8,7 @@
 
 import Foundation
 
-class ArticlesData: Codable {
+class ArticlesData: NSObject {
   var author: String?
   var title: String?
   var myDescription: String?

@@ -52,7 +52,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if context.hasChanges {
             do {
                 try context.save()
-            } catch _ {}
+            } catch _ {
+                print("Save Failed")
+                
+            }
         }
     }
   

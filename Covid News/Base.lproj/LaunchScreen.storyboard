@@ -17,17 +17,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iPhone 6, 7, 8 Plus – 2" translatesAutoresizingMaskIntoConstraints="NO" id="dak-EW-dhN">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="862"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Launch Image" translatesAutoresizingMaskIntoConstraints="NO" id="Ua1-kH-2fs">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="default"/>
                             </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="dak-EW-dhN" secondAttribute="trailing" id="c2T-vJ-V8i"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="dak-EW-dhN" secondAttribute="bottom" id="nny-sB-ipG"/>
-                            <constraint firstItem="dak-EW-dhN" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="ppK-Vu-JHM"/>
-                            <constraint firstItem="dak-EW-dhN" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="-44" id="u1T-kW-Db6"/>
+                            <constraint firstItem="Ua1-kH-2fs" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="0Ci-3F-h2q"/>
+                            <constraint firstAttribute="bottom" secondItem="Ua1-kH-2fs" secondAttribute="bottom" id="3rT-Ie-wHn"/>
+                            <constraint firstItem="Ua1-kH-2fs" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="JNu-Pr-neg"/>
+                            <constraint firstItem="Ua1-kH-2fs" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="YO3-rS-KDt"/>
                         </constraints>
                     </view>
                 </viewController>
@@ -37,7 +38,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="iPhone 6, 7, 8 Plus – 2" width="414" height="736"/>
+        <image name="Launch Image" width="414" height="896"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
